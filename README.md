@@ -2,6 +2,15 @@
 This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
 
 TODO: 
+- [ ] Think if it is best to upload everything together or separate
+- [ ] do i need to clean the data? 
+- [ ] Upload stuff to youtube and get the captions
+- [ ] Donwload the captions
+- [ ] compare them to the trascript
+- [ ] which metric to use?
+- [ ] think of nice comparison and visualization(male vs female) --> how do i keep track of the females and male texts?
+- [ ] maybe think if to use some metric from the class
+- [ ] Nice repo(title, nice description) 
 
 
 
