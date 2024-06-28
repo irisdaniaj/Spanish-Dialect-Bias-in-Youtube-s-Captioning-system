@@ -1,5 +1,5 @@
 This data set contains transcribed high-quality audio of Argentinian, Chilean, Colombian, Peruvian, Puerto Rican and Venezuelan Spanish sentences recorded by volunteers. 
-Each dialect is divided in two folders female and male, expect for Puerto Rico(only female). 
+Each dialect is divided in two folders: female and male, expect for Puerto Rico(only female). 
 The data set consists of wave files, and a TSV file (line_index.tsv). 
 The file line_index.tsv contains a anonymized FileID and the transcription of audio in the file.
 The data set has been manually quality checked, but there might still be errors.
