@@ -9,5 +9,5 @@ TODO:
 
 ## DATA 
 
-Here you can Download the LATAM Datatsets:
+Here you can Download the Datatsets:
 [Argentina](https://www.openslr.org/61/), [Chile](https://www.openslr.org/71/), [Colombia](https://www.openslr.org/72/), Spain, [Peru](https://www.openslr.org/73/), [Puerto Rico](https://www.openslr.org/74/) and [Venezuela](https://www.openslr.org/75/)
