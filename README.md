@@ -2,7 +2,7 @@
 This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
 
 TODO: 
-- [ ] Think if it is best to upload everything together or separate
+- [ ] Think if it is best to upload everything together or separate: I think separate it's better because if i keep them separate i can preserve the id as name and then i can find the correspoing right traslation like this. 
 - [ ] do i need to clean the data? 
 - [ ] Upload stuff to youtube and get the captions
 - [ ] Donwload the captions
