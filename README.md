@@ -2,10 +2,11 @@
 This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
 
 TODO: 
-- [ ] Download the datasets LATAM datasets from https://www.openslr.org/71/
-- [ ] Look for the Argentinian Datasets(it's not in the website)
-- [ ] Create one big datasets with all the LATAM Datasets
-- [ ] Check for gender in Spain Dataset https://www.kaggle.com/datasets/carlfm01/120h-spanish-speech
-- [ ] If necessary look for a new  Spain dataset
-- [ ] Allocate all the dataset in the corresponding folder
+- [ ] Lokk for Spanish dataset 
 - [ ] Create .txt file with the description of the datasets
+- [ ] 
+
+
+## DATA 
+
+Here you can Download the LATAM Datatsets: [Argentina])(https://www.openslr.org/61/), [Chile](https://www.openslr.org/71/), [Colombia](https://www.openslr.org/72/), Spain [Peru](https://www.openslr.org/73/), [Puerto Rico](https://www.openslr.org/74/) and Venezuelan(https://www.openslr.org/75/)
