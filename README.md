@@ -2,9 +2,9 @@
 This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
 
 TODO: 
-- [ ] Lokk for Spanish dataset 
+- [ ] Look for Spanish dataset 
 - [ ] Create .txt file with the description of the datasets
-- [ ] 
+
 
 
 ## DATA 
