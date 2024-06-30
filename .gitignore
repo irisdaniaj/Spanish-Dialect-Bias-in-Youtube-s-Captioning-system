@@ -4,3 +4,4 @@
 *.tgz
 client_secret.json
 token.json
+*.log
