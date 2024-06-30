@@ -2,3 +2,5 @@
 *.tsv
 *.zip
 *.tgz
+client_secret.json
+token.json
