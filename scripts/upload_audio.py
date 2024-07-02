@@ -18,7 +18,7 @@ def authenticate():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("client_secret.json", SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file("client_secret.json", SCOPES) # Replace with your client secret file
             creds = flow.run_local_server(port=0)
         with open("token.json", "w") as token:
             token.write(creds.to_json())
@@ -65,8 +65,8 @@ def convert_audio_to_video(audio_file, image_file, output_file):
     subprocess.run(command, check=True)
 
 if __name__ == "__main__":
-    audio_folder = "path_to_your_audio_folder"  # Replace with the path to your audio folder
-    image_file = "path_to_your_image_file"  # Replace with the path to your static image file
+    audio_folder = ".../data/raw/LATAM/aregentinian/es_ar_female"  # Replace with the path to your audio folder
+    image_file = ".../data/raw/A_black_image.jpg"  # Replace with the path to your static image file
 
     # Iterate over all .wav files in the specified folder
     for audio_file in os.listdir(audio_folder):
