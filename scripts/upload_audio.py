@@ -65,8 +65,8 @@ def convert_audio_to_video(audio_file, image_file, output_file):
     subprocess.run(command, check=True)
 
 if __name__ == "__main__":
-    audio_folder = ".../data/raw/LATAM/aregentinian/es_ar_female"  # Replace with the path to your audio folder
-    image_file = ".../data/raw/A_black_image.jpg"  # Replace with the path to your static image file
+    audio_folder = "Spanish-Dialect-Bias-in-Youtube-s-Captioning-system/data/raw/LATAM/argentinian/es_ar_female"  # Replace with the path to your audio folder
+    image_file = "Spanish-Dialect-Bias-in-Youtube-s-Captioning-system/data/raw/A_black_image.jpg"  # Replace with the path to your static image file
 
     # Iterate over all .wav files in the specified folder
     for audio_file in os.listdir(audio_folder):
