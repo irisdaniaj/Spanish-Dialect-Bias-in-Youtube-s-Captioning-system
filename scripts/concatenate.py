@@ -1,38 +1,6 @@
 import os
 import subprocess
 
-def concatenate_audios(audio_folder, output_file):
-    audio_files = [f for f in os.listdir(audio_folder) if f.endswith('.wav')]
-    audio_files.sort()  # Ensure files are in order if necessary
-
-    # Create a list file for FFmpeg
-    with open("file_list.txt", "w") as file_list:
-        start_times = []
-        current_time = 0.0
-
-        for audio_file in audio_files:
-            audio_path = os.path.join(audio_folder, audio_file)
-            duration = get_audio_duration(audio_path)
-            start_times.append((audio_file, current_time, current_time + duration))
-            file_list.write(f"file '{audio_path}'\n")
-            current_time += duration
-
-    # Use FFmpeg to concatenate the audio files
-    command = [
-        "ffmpeg",
-        "-f", "concat",
-        "-safe", "0",
-        "-i", "file_list.txt",
-        "-c", "copy",
-        output_file
-    ]
-    subprocess.run(command, check=True)
-
-    # Clean up
-    os.remove("file_list.txt")
-
-    return start_times
-
 def get_audio_duration(audio_file):
     result = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries",
@@ -43,14 +11,73 @@ def get_audio_duration(audio_file):
     )
     return float(result.stdout)
 
+def concatenate_audios(base_audio_folder, output_folder):
+    for root, dirs, _ in os.walk(base_audio_folder):
+        for subdir in dirs:
+            subdir_path = os.path.join(root, subdir)
+            audio_files = []
+            start_times = []
+            current_time = 0.0
+
+            print(f"Processing subdir: {subdir_path}")
+
+            for _, _, files in os.walk(subdir_path):
+                for file in files:
+                    if file.endswith(".wav"):
+                        audio_path = os.path.join(subdir_path, file)
+                        duration = get_audio_duration(audio_path)
+                        audio_files.append(audio_path)
+                        start_times.append((audio_path, current_time, current_time + duration))
+                        current_time += duration
+
+            if audio_files:
+                print(f"Found audio files: {audio_files}")
+
+                # Create a list file for FFmpeg
+                list_file_path = os.path.join(output_folder, f"file_list_{subdir.replace('/', '_')}.txt")
+                with open(list_file_path, "w") as file_list:
+                    for audio_file in audio_files:
+                        file_list.write(f"file '{audio_file}'\n")
+
+                # Define the output file path
+                subdir_name = os.path.relpath(subdir_path, base_audio_folder).replace(os.sep, '_')
+                processed_filename = f"concatenated_audio_{subdir_name}.wav"
+                output_file = os.path.join(output_folder, processed_filename)
+
+                print(f"Concatenating files into {output_file}")
+
+                # Use FFmpeg to concatenate the audio files
+                command = [
+                    "ffmpeg",
+                    "-f", "concat",
+                    "-safe", "0",
+                    "-i", list_file_path,
+                    "-c", "copy",
+                    output_file
+                ]
+                subprocess.run(command, check=True)
+
+                # Clean up
+                os.remove(list_file_path)
+
+                # Print start and end times for each audio file
+                print(f"Processed {subdir_path}")
+                for file, start, end in start_times:
+                    print(f"{file}: {start} - {end}")
+
 if __name__ == "__main__":
+    # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
+
     # Define the base directory (one level up from the script directory)
     base_dir = os.path.dirname(script_dir)
-    audio_folder = os.path.join(base_dir, "data/raw/LATAM/argentinian/es_ar_female")
-    output_file = os.path.join(base_dir, "data/processed/concated_audio/es_ar_female.wav")
-    start_times = concatenate_audios(audio_folder, output_file)
     
-    # Print start and end times for each audio file
-    for file, start, end in start_times:
-        print(f"{file}: {start} - {end}")
+    # Define the base audio folder and output folder
+    base_audio_folder = os.path.join(base_dir, "data/raw")
+    output_folder = os.path.join(base_dir, "data/processed")
+
+    # Ensure the output directory exists
+    os.makedirs(output_folder, exist_ok=True)
+
+    # Concatenate the audios
+    concatenate_audios(base_audio_folder, output_folder)
