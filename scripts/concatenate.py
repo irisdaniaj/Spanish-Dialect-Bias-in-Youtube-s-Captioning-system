@@ -48,7 +48,7 @@ if __name__ == "__main__":
     # Define the base directory (one level up from the script directory)
     base_dir = os.path.dirname(script_dir)
     audio_folder = os.path.join(base_dir, "data/raw/LATAM/argentinian/es_ar_female")
-    output_file = os.path.join(base_dir, "data/processed/concated_audio.wav")
+    output_file = os.path.join(base_dir, "data/processed/concated_audio/es_ar_female.wav")
     start_times = concatenate_audios(audio_folder, output_file)
     
     # Print start and end times for each audio file
