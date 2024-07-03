@@ -18,7 +18,7 @@ def authenticate():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("client_secret.json", SCOPES) # Replace with your client secret file
+            flow = InstalledAppFlow.from_client_secrets_file(client_secret_file, SCOPES) # Replace with your client secret file
             creds = flow.run_local_server(port=0)
         with open("token.json", "w") as token:
             token.write(creds.to_json())
@@ -65,9 +65,17 @@ def convert_audio_to_video(audio_file, image_file, output_file):
     subprocess.run(command, check=True)
 
 if __name__ == "__main__":
-    audio_folder = "Spanish-Dialect-Bias-in-Youtube-s-Captioning-system/data/raw/LATAM/argentinian/es_ar_female"  # Replace with the path to your audio folder
-    image_file = "Spanish-Dialect-Bias-in-Youtube-s-Captioning-system/data/raw/A_black_image.jpg"  # Replace with the path to your static image file
+    # Get the directory of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
 
+    # Define the base directory (one level up from the script directory)
+    base_dir = os.path.dirname(script_dir)
+
+    # Define the relative paths
+    client_secret_file = os.path.join(script_dir, "client_secret.json")
+    audio_folder = os.path.join(base_dir, "data/raw/LATAM/argentinian/es_ar_female")
+    image_file = os.path.join(base_dir, "data/raw/A_black_image.jpg")
+  
     # Iterate over all .wav files in the specified folder
     for audio_file in os.listdir(audio_folder):
         if audio_file.endswith(".wav"):
