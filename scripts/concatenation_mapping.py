@@ -14,16 +14,16 @@ def get_audio_duration(audio_file):
 
 def concatenate_audios(base_audio_folder, output_folder):
     countries = ['argentinian', 'colombian', 'chilean', 'peruvian', 'puerto_rican', 'venezuelan']
-    genders = ['es_ar_female', 'es_ar_male', 'es_co_female', 'es_co_male', 'es_cl_female', 'es_cl_male', 'es_pe_female', 'es_pe_male', 'es_pr_female', 'es_ve_female', 'es_ve_male']
-    mapping = {country: {gender: [] for gender in genders} for country in countries}
-
+    genders = ['female', 'male']
+    
     for country in countries:
         for gender in genders:
-            gender_path = os.path.join(base_audio_folder, country, gender)
+            gender_path = os.path.join(base_audio_folder, country, f"es_{country[:2]}_{gender}")
             if os.path.isdir(gender_path):
                 audio_files = []
                 start_times = []
                 current_time = 0.0
+                mapping = []
 
                 print(f"Processing {country} - {gender}")
 
@@ -34,7 +34,7 @@ def concatenate_audios(base_audio_folder, output_folder):
                             duration = get_audio_duration(audio_path)
                             audio_files.append(audio_path)
                             start_times.append((file, current_time, current_time + duration))
-                            mapping[country][gender].append({"file": file, "start": current_time, "end": current_time + duration})
+                            mapping.append({"file": file, "start": current_time, "end": current_time + duration})
                             current_time += duration
 
                 if audio_files:
@@ -71,9 +71,10 @@ def concatenate_audios(base_audio_folder, output_folder):
                     for file, start, end in start_times:
                         print(f"{file}: {start} - {end}")
 
-    # Save the mapping to a JSON file
-    with open(os.path.join(output_folder, "mapping.json"), "w") as f:
-        json.dump(mapping, f, indent=4)
+                    # Save the mapping to a JSON file
+                    mapping_filename = f"mapping_{country}_{gender}.json"
+                    with open(os.path.join(output_folder, mapping_filename), "w") as f:
+                        json.dump(mapping, f, indent=4)
 
 if __name__ == "__main__":
     # Get the directory of the current script
