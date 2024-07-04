@@ -8,6 +8,7 @@ TODO:
 - [ ] decide which of the python script to use
 - [ ] options: create a script that just does "male and female" both for spain and LATAM
 - [ ] create a concatenate.py that given the command line argument it deals with it
+- [ ] does the rename_and_move.py scripts really work????
 - [ ] create just one script that does this. 
 - [ ] also mapping.json for males and females
 - [ ] Also create nice command line executable script 
