@@ -4,7 +4,8 @@ This repository contain my final project for the Advanced Method in Social Scien
 TODO: 
 - [ ] I tried to upload them separely but I did exceed the daily Youtube's API quotas of videos that I can upload in a day, so I have created a one big .wav file with all the audios divided per gender together.
 - [ ] The problem now is to modify the script to handle to spanish gender audios because they are not so nicely divided in gender.
-- [ ] wtf are the .mp4 and why are they not ignored? 
+- [ ] wtf are the .mp4 and why are they not ignored?
+- [ ] decide which of the python script to use 
 - [ ] Also create nice command line executable script 
 - [ ] do i need to clean the data? 
 - [ ] Upload stuff to youtube and get the captions
