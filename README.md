@@ -2,7 +2,8 @@
 This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
 
 TODO: 
-- [ ] Think if it is best to upload everything together or separate: I think separate it's better because if i keep them separate i can preserve the id as name and then i can find the correspoing right traslation like this. 
+- [ ] I tried to upload them separely but I did exceed the daily Youtube's API quotas of videos that I can upload in a day, so I have created a one big .wav file with all the audios divided per gender together.
+- [ ] The problem now is to modify the script to handle to spanish gender audios because they are not so nicely divided in gender.  
 - [ ] do i need to clean the data? 
 - [ ] Upload stuff to youtube and get the captions
 - [ ] Donwload the captions
