@@ -6,6 +6,9 @@ TODO:
 - [ ] The problem now is to modify the script to handle to spanish gender audios because they are not so nicely divided in gender.
 - [ ] wtf are the .mp4 and why are they not ignored?
 - [ ] decide which of the python script to use
+- [ ] options: create a script that just does "male and female" both for spain and LATAM
+- [ ] create a concatenate.py that given the command line argument it deals with it
+- [ ] create just one script that does this. 
 - [ ] also mapping.json for males and females
 - [ ] Also create nice command line executable script 
 - [ ] do i need to clean the data? 
