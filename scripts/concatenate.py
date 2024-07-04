@@ -1,5 +1,6 @@
 import os
 import subprocess
+import json
 
 def get_audio_duration(audio_file):
     result = subprocess.run(
@@ -18,9 +19,17 @@ def concatenate_audios(base_audio_folder, output_folder):
             for gender in os.listdir(country_path):
                 gender_path = os.path.join(country_path, gender)
                 if os.path.isdir(gender_path):
+                    processed_filename = f"concatenated_audio_{country}_{gender}.wav"
+                    output_file = os.path.join(output_folder, processed_filename)
+                    
+                    if os.path.exists(output_file):
+                        print(f"Skipping {country} - {gender} as {processed_filename} already exists.")
+                        continue
+                    
                     audio_files = []
                     start_times = []
                     current_time = 0.0
+                    mapping = []
 
                     print(f"Processing {country} - {gender}")
 
@@ -30,7 +39,8 @@ def concatenate_audios(base_audio_folder, output_folder):
                                 audio_path = os.path.join(gender_path, file)
                                 duration = get_audio_duration(audio_path)
                                 audio_files.append(audio_path)
-                                start_times.append((audio_path, current_time, current_time + duration))
+                                start_times.append((file, current_time, current_time + duration))
+                                mapping.append({"file": file, "start": current_time, "end": current_time + duration})
                                 current_time += duration
 
                     if audio_files:
@@ -41,10 +51,6 @@ def concatenate_audios(base_audio_folder, output_folder):
                         with open(list_file_path, "w") as file_list:
                             for audio_file in audio_files:
                                 file_list.write(f"file '{audio_file}'\n")
-
-                        # Define the output file path
-                        processed_filename = f"concatenated_audio_{country}_{gender}.wav"
-                        output_file = os.path.join(output_folder, processed_filename)
 
                         print(f"Concatenating files into {output_file}")
 
@@ -66,6 +72,11 @@ def concatenate_audios(base_audio_folder, output_folder):
                         print(f"Processed {country_path} - {gender}")
                         for file, start, end in start_times:
                             print(f"{file}: {start} - {end}")
+
+                        # Save the mapping to a JSON file
+                        mapping_filename = f"mapping_{country}_{gender}.json"
+                        with open(os.path.join(output_folder, mapping_filename), "w") as f:
+                            json.dump(mapping, f, indent=4)
 
 if __name__ == "__main__":
     # Get the directory of the current script
