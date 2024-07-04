@@ -1,5 +1,6 @@
 import os
 import subprocess
+import json
 
 def get_audio_duration(audio_file):
     result = subprocess.run(
@@ -12,6 +13,8 @@ def get_audio_duration(audio_file):
     return float(result.stdout)
 
 def concatenate_audios(base_audio_folder, output_folder):
+    mapping = {"male": [], "female": []}
+    
     for root, _, files in os.walk(base_audio_folder):
         male_audio_files = []
         female_audio_files = []
@@ -29,11 +32,13 @@ def concatenate_audios(base_audio_folder, output_folder):
                 
                 if "_M_" in file:
                     male_audio_files.append(audio_path)
-                    male_start_times.append((audio_path, male_current_time, male_current_time + duration))
+                    male_start_times.append((file, male_current_time, male_current_time + duration))
+                    mapping["male"].append({"file": file, "start": male_current_time, "end": male_current_time + duration})
                     male_current_time += duration
                 elif "_F_" in file:
                     female_audio_files.append(audio_path)
-                    female_start_times.append((audio_path, female_current_time, female_current_time + duration))
+                    female_start_times.append((file, female_current_time, female_current_time + duration))
+                    mapping["female"].append({"file": file, "start": female_current_time, "end": female_current_time + duration})
                     female_current_time += duration
 
         if male_audio_files:
@@ -85,6 +90,10 @@ def concatenate_audios(base_audio_folder, output_folder):
             print(f"Processed female files in {root}")
             for file, start, end in female_start_times:
                 print(f"{file}: {start} - {end}")
+
+    # Save the mapping to a JSON file
+    with open(os.path.join(output_folder, "mapping.json"), "w") as f:
+        json.dump(mapping, f, indent=4)
 
 if __name__ == "__main__":
     # Get the directory of the current script
