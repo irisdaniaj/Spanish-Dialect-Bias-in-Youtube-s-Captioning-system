@@ -5,6 +5,7 @@ TODO:
 - [ ] I tried to upload them separely but I did exceed the daily Youtube's API quotas of videos that I can upload in a day, so I have created a one big .wav file with all the audios divided per gender together.
 - [ ] The problem now is to modify the script to handle to spanish gender audios because they are not so nicely divided in gender.
 - [ ] wtf are the .mp4 and why are they not ignored?
+- [ ] TROVA IL MODO DI FAR ANDARE TUTTO PTOMAAAAA JEEEZ 
 - [ ] FIRST TODO: TROVARE UN MODO DI UNIFICARE LA COSA JEEZ NON NE POSSO PI FACCIAMO UN UNICO FILE CHE FA TUTTO HEELEP FUCKING HELP 
 - [ ] decide which of the python script to use
 - [ ] options: create a script that just does "male and female" both for spain and LATAM
