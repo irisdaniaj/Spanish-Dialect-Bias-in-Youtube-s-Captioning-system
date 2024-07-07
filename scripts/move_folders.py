@@ -23,15 +23,3 @@ def move_audio_files(base_audio_folder):
                 shutil.move(file_path, new_path)
                 print(f"Moved {file_name} to {male_folder}")
 
-if __name__ == "__main__":
-    # Get the directory of the current script
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-
-    # Define the base directory (three levels up from the script directory)
-    base_dir = os.path.dirname(script_dir)
-    
-    # Define the base audio folder using the base directory
-    base_audio_folder = os.path.join(base_dir, "data/raw/spain/tedx_spain/tedx_spanish_corpus/speech")
-
-    # Move the audio files
-    move_audio_files(base_audio_folder)
