@@ -31,7 +31,9 @@ After downloading the data move them into the corresponding folders(all LATAM co
 Execute rename_and_move.py from the script folder 
 
 '''
+
 python rename_and_move.py
+
 '''
 
 This script will create a nice structure of the data that will be easier to handle. 
