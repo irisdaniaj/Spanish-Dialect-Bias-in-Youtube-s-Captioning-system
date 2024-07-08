@@ -4,5 +4,6 @@
 *.tgz
 client_secret.json
 token.json
+mapping*.json
 *.log
 *.mp4

@@ -16,10 +16,6 @@ def concatenate_audios(output_folder, country, gender, audio_files, start_times)
     if audio_files:
         processed_filename = f"concatenated_audio_{country}_{gender}.wav"
         output_file = os.path.join(output_folder, processed_filename)
-        
-        if os.path.exists(output_file):
-            print(f"Skipping {country} - {gender} as {processed_filename} already exists.")
-            return
 
         print(f"Found audio files: {audio_files}")
 
@@ -58,9 +54,15 @@ def concatenate_audios(output_folder, country, gender, audio_files, start_times)
 def process_latam(base_audio_folder, output_folder):
     countries = ['argentinian', 'colombian', 'chilean', 'peruvian', 'puerto_rican', 'venezuelan']
     genders = ['female', 'male']
-    
+
     for country in countries:
         for gender in genders:
+            processed_filename = f"concatenated_audio_{country}_{gender}.wav"
+            output_file = os.path.join(output_folder, processed_filename)
+            if os.path.exists(output_file):
+                print(f"Skipping {country} - {gender} as {processed_filename} already exists.")
+                continue
+
             gender_path = os.path.join(base_audio_folder, country, f"es_{country[:2]}_{gender}")
             if os.path.isdir(gender_path):
                 audio_files = []
@@ -82,8 +84,14 @@ def process_latam(base_audio_folder, output_folder):
 
 def process_spain(base_audio_folder, output_folder, transcription_file):
     genders = ['female', 'male']
-    
+
     for gender in genders:
+        processed_filename = f"concatenated_audio_spain_{gender}.wav"
+        output_file = os.path.join(output_folder, processed_filename)
+        if os.path.exists(output_file):
+            print(f"Skipping Spain - {gender} as {processed_filename} already exists.")
+            continue
+
         gender_path = os.path.join(base_audio_folder, gender)
         if os.path.isdir(gender_path):
             audio_files = []
@@ -102,7 +110,7 @@ def process_spain(base_audio_folder, output_folder, transcription_file):
                         current_time += duration
 
             concatenate_audios(output_folder, 'spain', gender, audio_files, start_times)
-
+""""
             # Process transcription file
             with open(transcription_file, 'r') as f:
                 transcriptions = f.readlines()
@@ -118,16 +126,17 @@ def process_spain(base_audio_folder, output_folder, transcription_file):
             with open(os.path.join(output_folder, mapping_filename), "w") as f:
                 json.dump(transcription_map, f, indent=4)
 
+"""
 if __name__ == "__main__":
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Define the base directory (one level up from the script directory)
     base_dir = os.path.dirname(script_dir)
-    
+
     # Define the base audio folder and output folder for LATAM
     base_audio_folder_latam = os.path.join(base_dir, "data/raw/LATAM")
-    output_folder_latam = os.path.join(base_dir, "data/processed")
+    output_folder_latam = os.path.join(base_dir, "data/interim")
 
     # Ensure the output directory exists
     os.makedirs(output_folder_latam, exist_ok=True)
@@ -137,7 +146,7 @@ if __name__ == "__main__":
 
     # Define the base audio folder and output folder for Spain
     base_audio_folder_spain = os.path.join(base_dir, "data/raw/spain/tedx_spain/tedx_spanish_corpus/speech")
-    output_folder_spain = os.path.join(base_dir, "data/processed")
+    output_folder_spain = os.path.join(base_dir, "data/interim")
 
     # Ensure the output directory exists
     os.makedirs(output_folder_spain, exist_ok=True)
