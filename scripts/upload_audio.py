@@ -18,7 +18,7 @@ def authenticate():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(client_secret_file, SCOPES) # Replace with your client secret file
+            flow = InstalledAppFlow.from_client_secrets_file(client_secret_file, SCOPES)  # Replace with your client secret file
             creds = flow.run_local_server(port=0)
         with open("token.json", "w") as token:
             token.write(creds.to_json())
@@ -73,14 +73,18 @@ if __name__ == "__main__":
 
     # Define the relative paths
     client_secret_file = os.path.join(script_dir, "client_secret.json")
-    audio_folder = os.path.join(base_dir, "data/processed")
+    audio_folder = os.path.join(base_dir, "data/interim")
     image_file = os.path.join(base_dir, "data/raw/A_black_image.jpg")
+    processed_folder = os.path.join(base_dir, "data/processed")
   
+    # Ensure the processed directory exists
+    os.makedirs(processed_folder, exist_ok=True)
+
     # Iterate over all .wav files in the specified folder
     for audio_file in os.listdir(audio_folder):
         if audio_file.endswith(".wav"):
             audio_path = os.path.join(audio_folder, audio_file)
-            video_file = os.path.join(audio_folder, os.path.splitext(audio_file)[0] + ".mp4")
+            video_file = os.path.join(processed_folder, os.path.splitext(audio_file)[0] + ".mp4")
 
             # Convert audio to video
             convert_audio_to_video(audio_path, image_file, video_file)
