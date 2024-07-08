@@ -30,10 +30,9 @@ After the download you can put the data into the correspective folders. Note: Th
 After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the the spain folder). 
 Execute rename_and_move.py from the script folder 
 
-'''
-
+```
 python rename_and_move.py
 
-'''
+```
 
 This script will create a nice structure of the data that will be easier to handle. 
