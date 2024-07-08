@@ -3,19 +3,10 @@ This repository contain my final project for the Advanced Method in Social Scien
 
 TODO: 
 - [ ] I tried to upload them separely but I did exceed the daily Youtube's API quotas of videos that I can upload in a day, so I have created a one big .wav file with all the audios divided per gender together.
-- [ ] The problem now is to modify the script to handle to spanish gender audios because they are not so nicely divided in gender.
-- [ ] wtf are the .mp4 and why are they not ignored?
-- [ ] TROVA IL MODO DI FAR ANDARE TUTTO PTOMAAAAA JEEEZ 
-- [ ] FIRST TODO: TROVARE UN MODO DI UNIFICARE LA COSA JEEZ NON NE POSSO PI FACCIAMO UN UNICO FILE CHE FA TUTTO HEELEP FUCKING HELP 
-- [ ] decide which of the python script to use
-- [ ] options: create a script that just does "male and female" both for spain and LATAM
-- [ ] create a concatenate.py that given the command line argument it deals with it
+- [ ] Also changing in the internal structure to make worj easier(female and male rename for LATAM and female and male folder creation for spain) 
 - [ ] does the rename_and_move.py scripts really work????
 - [ ] I have the audios so far, I need to convert them to videos.
 - [ ] Upload them 
-- [ ] create just one script that does this. 
-- [ ] also mapping.json for males and females
-- [ ] Also create nice command line executable script 
 - [ ] do i need to clean the data? 
 - [ ] Upload stuff to youtube and get the captions
 - [ ] Donwload the captions
@@ -28,8 +19,19 @@ TODO:
 
 
 
-## DATA 
+## Data
 
 Here you can Download the Datatsets:
 [Argentina](https://www.openslr.org/61/), [Chile](https://www.openslr.org/71/), [Colombia](https://www.openslr.org/72/), [Spain](https://www.openslr.org/67/), [Peru](https://www.openslr.org/73/), [Puerto Rico](https://www.openslr.org/74/) and [Venezuela](https://www.openslr.org/75/). 
 After the download you can put the data into the correspective folders. Note: There is no male audio for the Puerto Rico dataset. 
+
+## Data preparation 
+
+After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the the spain folder). 
+Execute rename_and_move.py from the script folder 
+
+'''
+python rename_and_move.py
+'''
+
+This script will create a nice structure of the data that will be easier to handle. 
