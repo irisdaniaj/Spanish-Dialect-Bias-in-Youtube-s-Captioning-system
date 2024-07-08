@@ -1,14 +1,13 @@
 # Spanish Dialect Bias in Youtube's Captioning system
 This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
 
-TODO: 
+Recap so far: 
 - [ ] I tried to upload them separely but I did exceed the daily Youtube's API quotas of videos that I can upload in a day, so I have created a one big .wav file with all the audios divided per gender together.
-- [ ] Also changing in the internal structure to make worj easier(female and male rename for LATAM and female and male folder creation for spain) 
-- [ ] does the rename_and_move.py scripts really work????
-- [ ] adjust mapping function and run new script
-- [ ] the videos should be save in the processed folder
-- [ ] and move the concatenated audio to the interim folder 
-- [ ] I have the audios so far, I need to convert them to videos.
+- [ ] Also changing in the internal structure to make worj easier(female and male rename for LATAM and female and male folder creation for spain).
+- [ ] Concatenate and create the mapping.json file, all files will be saved in the data/interim folder
+- [ ] now we need to convert the .wav into vidoes because yt only accept videos, to do so we will use a simple black image and convert from .wab to .mp4
+
+TODO: 
 - [ ] Upload them 
 - [ ] do i need to clean the data? 
 - [ ] Upload stuff to youtube and get the captions
@@ -51,3 +50,9 @@ Now, we are ready to manipulate the data. To do so, run the  concatenation_mappi
 python concatenation_mapping.py 
 ```
 This script will concantenate all the different .wav audios files in one big audio for each contry and gender. It will also create a mapping .json file that will map the name of the audio, and its duration. We will need this later when comparing the generated caption to the ground truth text that we have. 
+
+We now need to convert the .wav files into an audio because Youtube only accept videos and not audios, so we will just use a black image and upload the audio. We will do this in the same script that will upload the videos to Youtube. 
+
+```
+python upload_youtube.py 
+```
