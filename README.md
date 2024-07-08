@@ -10,6 +10,9 @@ TODO:
 - [ ] do i need to clean the data? 
 - [ ] Upload stuff to youtube and get the captions
 - [ ] Donwload the captions
+- [ ] Also describe the part of setting up the Youtube part
+- [ ] git clone
+- [ ] requirements.txt 
 - [ ] compare them to the trascript
 - [ ] which metric to use?
 - [ ] think of nice comparison and visualization(male vs female) --> how do i keep track of the females and male texts?
@@ -28,7 +31,7 @@ After the download you can put the data into the correspective folders. Note: Th
 ## Data preparation 
 
 After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the the spain folder). 
-Move to the scripts directory 
+Move to the scripts directory since we will run all the scripts from here. 
 ```
 cd scripts
 ```
@@ -38,3 +41,10 @@ python rename_and_move.py
 ```
 
 This script will create a nice structure of the data that will be easier to handle. 
+
+Now, we are ready to manipulate the data. To do so, run the  concatenation_mapping.py script
+
+```
+python concatenation_mapping.py 
+```
+This script will concantenate all the different .wav audios files in one big audio for each contry and gender. It will also create a mapping .json file that will map the name of the audio, and its duration. We will need this later when comparing the generated caption to the ground truth text that we have. 
