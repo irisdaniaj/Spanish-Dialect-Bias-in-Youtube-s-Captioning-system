@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
     # Define the relative paths
     client_secret_file = os.path.join(script_dir, "client_secret.json")
-    audio_folder = os.path.join(base_dir, "data/raw/LATAM/argentinian/es_ar_female")
+    audio_folder = os.path.join(base_dir, "data/processed")
     image_file = os.path.join(base_dir, "data/raw/A_black_image.jpg")
   
     # Iterate over all .wav files in the specified folder

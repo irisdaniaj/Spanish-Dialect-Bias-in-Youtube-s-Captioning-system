@@ -62,19 +62,11 @@ if __name__ == "__main__":
     
     # Define the base audio folder
     base_audio_folder_gender = os.path.join(base_dir, "data/raw/LATAM")
-
-    # Rename the gender folders
-    rename_gender_folders(base_audio_folder_gender)
-
-if __name__ == "__main__":
-    # Get the directory of the current script
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-
-    # Define the base directory (three levels up from the script directory)
-    base_dir = os.path.dirname(script_dir)
-    
-    # Define the base audio folder using the base directory
     base_audio_folder = os.path.join(base_dir, "data/raw/spain/tedx_spain/tedx_spanish_corpus/speech")
 
     # Move the audio files
     move_audio_files(base_audio_folder)
+    # Rename the gender folders
+    rename_gender_folders(base_audio_folder_gender)
+
+
