@@ -8,7 +8,8 @@ Recap so far:
 - [ ] now we need to convert the .wav into vidoes because yt only accept videos, to do so we will use a simple black image and convert from .wab to .mp4
 
 TODO: 
-- [ ] Upload them 
+- [ ] Upload them
+- [ ] fai un git pull, e cancella il vecchio upload_youtube.py e rinomina upload_audio.py to upload_youtube.py
 - [ ] do i need to clean the data? 
 - [ ] Upload stuff to youtube and get the captions
 - [ ] Donwload the captions
