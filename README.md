@@ -5,6 +5,9 @@ TODO:
 - [ ] I tried to upload them separely but I did exceed the daily Youtube's API quotas of videos that I can upload in a day, so I have created a one big .wav file with all the audios divided per gender together.
 - [ ] Also changing in the internal structure to make worj easier(female and male rename for LATAM and female and male folder creation for spain) 
 - [ ] does the rename_and_move.py scripts really work????
+- [ ] adjust mapping function and run new script
+- [ ] the videos should be save in the processed folder
+- [ ] and move the concatenated audio to the interim folder 
 - [ ] I have the audios so far, I need to convert them to videos.
 - [ ] Upload them 
 - [ ] do i need to clean the data? 
