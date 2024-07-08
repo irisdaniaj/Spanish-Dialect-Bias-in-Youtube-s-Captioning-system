@@ -10,7 +10,8 @@ Recap so far:
 TODO: 
 - [ ] Upload them
 - [ ] fai un git pull, e cancella il vecchio upload_youtube.py e rinomina upload_audio.py to upload_youtube.py
-- [ ] do i need to clean the data? 
+- [ ] do i need to clean the data?
+- [ ] to include or exclude puerto rico? 
 - [ ] Upload stuff to youtube and get the captions
 - [ ] Donwload the captions
 - [ ] Also describe the part of setting up the Youtube part
