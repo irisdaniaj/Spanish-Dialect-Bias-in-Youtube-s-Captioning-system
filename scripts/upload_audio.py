@@ -86,6 +86,11 @@ if __name__ == "__main__":
             audio_path = os.path.join(audio_folder, audio_file)
             video_file = os.path.join(processed_folder, os.path.splitext(audio_file)[0] + ".mp4")
 
+            # Check if the video file already exists
+            if os.path.exists(video_file):
+                print(f"Skipping creation of {video_file} as it already exists.")
+                continue
+
             # Convert audio to video
             convert_audio_to_video(audio_path, image_file, video_file)
 
