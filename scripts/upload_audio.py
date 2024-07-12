@@ -5,7 +5,6 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
-import subprocess
 
 # Define the scope for YouTube Data API
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
@@ -50,55 +49,27 @@ def upload_video(video_file, title, description, tags, category, privacy_status)
 
     print(f"Video uploaded successfully: https://www.youtube.com/watch?v={response_upload['id']}")
 
-def convert_audio_to_video(audio_file, image_file, output_file):
-    command = [
-        "ffmpeg",
-        "-loop", "1",
-        "-i", image_file,
-        "-i", audio_file,
-        "-c:v", "libx264",
-        "-c:a", "aac",
-        "-b:a", "192k",
-        "-shortest",
-        output_file
-    ]
-    subprocess.run(command, check=True)
-
 if __name__ == "__main__":
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Define the base directory (one level up from the script directory)
     base_dir = os.path.dirname(script_dir)
-
+# culo
     # Define the relative paths
     client_secret_file = os.path.join(script_dir, "client_secret.json")
-    audio_folder = os.path.join(base_dir, "data/interim")
-    image_file = os.path.join(base_dir, "data/raw/A_black_image.jpg")
-    processed_folder = os.path.join(base_dir, "data/processed")
+    video_folder = os.path.join(base_dir, "data/processed")
   
-    # Ensure the processed directory exists
-    os.makedirs(processed_folder, exist_ok=True)
-
-    # Iterate over all .wav files in the specified folder
-    for audio_file in os.listdir(audio_folder):
-        if audio_file.endswith(".wav"):
-            audio_path = os.path.join(audio_folder, audio_file)
-            video_file = os.path.join(processed_folder, os.path.splitext(audio_file)[0] + ".mp4")
-
-            # Check if the video file already exists
-            if os.path.exists(video_file):
-                print(f"Skipping creation of {video_file} as it already exists.")
-                continue
-
-            # Convert audio to video
-            convert_audio_to_video(audio_path, image_file, video_file)
+    # Iterate over all .mp4 files in the specified folder
+    for video_file in os.listdir(video_folder):
+        if video_file.endswith(".mp4"):
+            video_path = os.path.join(video_folder, video_file)
 
             # Upload video to YouTube
-            title = f"Title for {audio_file}"  # Customize the title as needed
-            description = f"Description for {audio_file}"  # Customize the description as needed
+            title = f"Title for {video_file}"  # Customize the title as needed
+            description = f"Description for {video_file}"  # Customize the description as needed
             tags = ["tag1", "tag2"]  # Customize the tags as needed
             category = "22"  # Replace with the appropriate category ID
             privacy_status = "public"  # "public", "private", or "unlisted"
 
-            upload_video(video_file, title, description, tags, category, privacy_status)
+            upload_video(video_path, title, description, tags, category, privacy_status)
