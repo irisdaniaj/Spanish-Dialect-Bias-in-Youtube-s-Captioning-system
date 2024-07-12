@@ -8,10 +8,6 @@ Recap so far:
 - [ ] now we need to convert the .wav into vidoes because yt only accept videos, to do so we will use a simple black image and convert from .wab to .mp4
 
 TODO: 
-- [ ] Upload them
-- [ ] fai un git pull, e cancella il vecchio upload_youtube.py e rinomina upload_audio.py to upload_youtube.py
-- [ ] do i need to clean the data?
-- [ ] to include or exclude puerto rico? 
 - [ ] Upload stuff to youtube and get the captions
 - [ ] Donwload the captions
 - [ ] Also describe the part of setting up the Youtube part
@@ -53,8 +49,14 @@ python concatenation_mapping.py
 ```
 This script will concantenate all the different .wav audios files in one big audio for each contry and gender. It will also create a mapping .json file that will map the name of the audio, and its duration. We will need this later when comparing the generated caption to the ground truth text that we have. 
 
-We now need to convert the .wav files into an audio because Youtube only accept videos and not audios, so we will just use a black image and upload the audio. We will do this in the same script that will upload the videos to Youtube. 
+We now need to convert the .wav files into an audio because Youtube only accept videos and not audios, so we will just use a black image and upload the audio. To do this run 
 
 ```
-python upload_youtube.py 
+python audio_to_video.py 
+```
+
+Now we can upload the video on Youtube by running
+
+```
+python upload_youtube.py
 ```
