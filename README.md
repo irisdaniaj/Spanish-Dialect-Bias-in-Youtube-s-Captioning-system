@@ -17,7 +17,9 @@ TODO:
 - [ ] which metric to use?
 - [ ] think of nice comparison and visualization(male vs female) --> how do i keep track of the females and male texts?
 - [ ] maybe think if to use some metric from the class
-- [ ] Nice repo(title, nice description) 
+- [ ] Nice repo(title, nice description)
+- [ ] Link how to set up Youtube API
+- [ ] Explain that videos will be longer than 15min, authentication is required 
 
 
 
