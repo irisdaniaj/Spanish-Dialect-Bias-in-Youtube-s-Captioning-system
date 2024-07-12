@@ -12,7 +12,7 @@ def get_audio_duration(audio_file):
     )
     return float(result.stdout)
 
-def concatenate_audios(output_folder, country, gender, audio_files, start_times, max_duration=3600):
+def concatenate_audios(output_folder, country, gender, audio_files, start_times, max_duration=1800):
     processed_filename = f"concatenated_audio_{country}_{gender}.wav"
     output_file = os.path.join(output_folder, processed_filename)
     mapping_filename = f"mapping_{country}_{gender}.json"
