@@ -59,6 +59,8 @@ We now need to convert the .wav files into an audio because Youtube only accept 
 python audio_to_video.py 
 ```
 
+In the next part we will upload the videos via the Youtube's API and we will need to get a Youtube API key. More information [here](https://blog.hubspot.com/website/how-to-get-youtube-api-key). Please after step 7 make sure to dowlonad the "client_secret.json" file and place it in the same directory where you will run the script(scripts in this repo). 
+
 Now we can upload the video on Youtube by running
 
 ```
