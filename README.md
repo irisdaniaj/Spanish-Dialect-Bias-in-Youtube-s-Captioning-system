@@ -1,4 +1,7 @@
 # Spanish Dialect Bias in Youtube's Captioning system
+
+Spanish is the official language of 21 countries and it is spoken by more then 441 million people. Of course there is a lot of variation in the spoken language of these different countries, but Youtube only has one option for generating captions. Could this captioning system be biased against one or more this Spanish Dialect? My work tries to answer this question. To do so we will use the [Crowdsourcing Latin American Spanish for Low-Resource Text-to-Speech](https://aclanthology.org/2020.lrec-1.801.pdf) datasets by Google. 
+
 This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
 
 Recap so far: 
