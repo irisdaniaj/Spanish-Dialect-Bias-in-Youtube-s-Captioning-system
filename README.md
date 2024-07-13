@@ -15,7 +15,6 @@ Recap so far:
 TODO: 
 - [ ] Upload stuff to youtube and get the captions
 - [ ] Donwload the captions
-- [ ] Also describe the part of setting up the Youtube part
 - [ ] git clone
 - [ ] requirements.txt 
 - [ ] compare them to the trascript
@@ -23,8 +22,6 @@ TODO:
 - [ ] think of nice comparison and visualization(male vs female) --> how do i keep track of the females and male texts?
 - [ ] maybe think if to use some metric from the class
 - [ ] Nice repo(title, nice description)
-- [ ] Link how to set up Youtube API
-- [ ] Explain that videos will be longer than 15min, authentication is required 
 
 
 
