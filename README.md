@@ -23,7 +23,8 @@ TODO:
 - [ ] maybe think if to use some metric from the class
 - [ ] Nice repo(title, nice description)
 - [ ] force to create new channel
-- [ ] Research better what ASR technoly Youtube/or Google uses 
+- [ ] Research better what ASR technoly Youtube/or Google uses
+- [ ] Create QR code for project 
 
 
 
