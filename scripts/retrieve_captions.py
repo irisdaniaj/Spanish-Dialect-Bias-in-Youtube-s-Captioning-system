@@ -16,7 +16,7 @@ def authenticate():
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
     if not creds or not creds.valid:
-        if creds and creds expired and creds.refresh_token:
+        if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file("client_secret.json", SCOPES)
@@ -113,8 +113,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     
-    output_dir = "/home/irisdaniaj/workspace/SDS24/Spanish-Dialect-Bias-in-Youtube-s-Captioning-system/results"
-    metadata_file = "/home/irisdaniaj/workspace/SDS24/Spanish-Dialect-Bias-in-Youtube-s-Captioning-system/data/metadata.json"
+    # Use relative paths
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    base_dir = os.path.dirname(script_dir)
+    output_dir = os.path.join(base_dir, "results")
+    metadata_file = os.path.join(base_dir, "data", "metadata.json")
     
     raw_captions_dir = os.path.join(output_dir, "raw", "captions")
     intermediate_captions_dir = os.path.join(output_dir, "intermediate", "captions_integrated")
