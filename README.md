@@ -2,9 +2,8 @@
 
 Spanish is the official language of 21 countries and is spoken by over 441 million people. Naturally, there are many variations in how Spanish is spoken across these countries. However, YouTube offers only one option for generating captions in Spanish. This raises the question: could this captioning system be biased against certain Spanish dialects?
 
-My research aims to answer this question. To do so, we will use Google's [Crowdsourcing Latin American Spanish for Low-Resource Text-to-Speech](https://aclanthology.org/2020.lrec-1.801.pdf) datasets.
+My research aims to answer this question. To do so, we will use Google's [Crowdsourcing Latin American Spanish for Low-Resource Text-to-Speech](https://aclanthology.org/2020.lrec-1.801.pdf) and the [TEDx Spanish Corpus](https://www.openslr.org/67/) datasets.
 
-This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
 
 Recap so far: 
 - [ ] I tried to upload them separely but I did exceed the daily Youtube's API quotas of videos that I can upload in a day, so I have created a one big .wav file with all the audios divided per gender together.
@@ -77,3 +76,6 @@ NOTE: Youtube only allows to upload 6 videos each days via API, so to keep track
 
 Now that the videos have been uploaded we can retrieve the generated captions
 
+## Note 
+
+This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
