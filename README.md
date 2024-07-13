@@ -69,6 +69,7 @@ Now we can upload the video on Youtube by running
 python upload_youtube.py
 ```
 Before uploading the first video you will be asked to choose a Youtube channel to upload the video to. Please select the same account that you have authorize in the steps before. If you want to create a new Youtube channel just to upload this videos you can do so(I highly suggest it). More information [here](https://support.google.com/youtube/answer/1646861?hl=en). 
+
 NOTE: Youtube only allows to upload 6 videos each days via API, so to keep track of which videos have been uploaded to Youtube the script will also create an "uploaded_videos.json" file in which the title of the uploaded videos will be saved. So, next time we run the script we will first check which videos have already been uploaded to Youtube to not uploaded them twice. 
 
 Now that the videos have been uploaded we can retrieve the generated captions
