@@ -30,7 +30,7 @@ Here you can Download the Datatsets:
 [Argentina](https://www.openslr.org/61/), [Chile](https://www.openslr.org/71/), [Colombia](https://www.openslr.org/72/), [Spain](https://www.openslr.org/67/), [Peru](https://www.openslr.org/73/), [Puerto Rico](https://www.openslr.org/74/) and [Venezuela](https://www.openslr.org/75/). 
 After the download you can put the data into the correspective folders. Note: There is no male audio for the Puerto Rico dataset. 
 
-## Data preparation 
+## Main part 
 
 After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the the spain folder). 
 Move to the scripts directory since we will run all the scripts from here. 
@@ -49,7 +49,7 @@ Now, we are ready to manipulate the data. To do so, run the  concatenation_mappi
 ```
 python concatenation_mapping.py 
 ```
-This script will concantenate all the different .wav audios files in one big audio for each contry and gender. It will also create a mapping .json file that will map the name of the audio, and its duration. We will need this later when comparing the generated caption to the ground truth text that we have. 
+This script will concantenate all the different .wav audios files in one big audio for each contry and gender of maximum 30 minutes. It will also create a mapping .json file that will map the name of the audio, and its duration. We will need this later when comparing the generated caption to the ground truth text that we have. 
 
 We now need to convert the .wav files into an audio because Youtube only accept videos and not audios, so we will just use a black image and upload the audio. To do this run 
 
@@ -62,3 +62,7 @@ Now we can upload the video on Youtube by running
 ```
 python upload_youtube.py
 ```
+NOTE: Youtube only allows to upload 6 videos each days via API, so to keep track of which videos have been uploaded to Youtube the script will also create an "uploaded_videos.json" file in which the title of the uploaded videos will be saved. So, next time we run the script we will first check which videos have already been uploaded to Youtube to not uploaded them twice. 
+
+Now that the videos have been uploaded we can retrieve the generated captions
+
