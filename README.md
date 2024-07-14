@@ -35,7 +35,7 @@ Here you can Download the Datatsets:
 [Argentina](https://www.openslr.org/61/), [Chile](https://www.openslr.org/71/), [Colombia](https://www.openslr.org/72/), [Spain](https://www.openslr.org/67/), [Peru](https://www.openslr.org/73/), [Puerto Rico](https://www.openslr.org/74/) and [Venezuela](https://www.openslr.org/75/). 
 After the download you can put the data into the correspective folders. Note: There is no male audio for the Puerto Rico dataset. 
 
-## Main part 
+## Main 
 
 After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the the spain folder). 
 Move to the scripts directory since we will run all the scripts from here. 
@@ -54,7 +54,7 @@ Now, we are ready to manipulate the data. To do so, run the  concatenation_mappi
 ```
 python concatenation_mapping.py 
 ```
-This script will concantenate all the different .wav audios files in one big audio for each contry and gender of maximum 30 minutes. It will also create a mapping .json file that will map the name of the audio, and its duration. We will need this later when comparing the generated caption to the ground truth text that we have. 
+This script will concantenate all the different .wav audios files in one big audio for each contry and gender of maximum 30 minutes with a five second delay between each audio. It will also create a mapping .json file that will map the name of the audio, and its duration. We will need this later when comparing the generated caption to the ground truth text that we have. 
 
 NOTE: Youtube requires to authenticate your account if you post videos longer than 15 minutes, so if you plan to reproduce this work you will need to. More information [here](https://support.google.com/youtube/answer/71673?hl=en&co=GENIE.Platform%3DDesktop&oco=0). 
 
@@ -66,16 +66,20 @@ python audio_to_video.py
 
 In the next part we will upload the videos via the Youtube's API and we will need to get a Youtube API key. More information [here](https://blog.hubspot.com/website/how-to-get-youtube-api-key). Please after step 7 make sure to dowlonad the "client_secret.json" file and place it in the same directory where you will run the script(scripts in this repo). 
 
-Now we can upload the video on Youtube by running
+Before uploading the first video, you will be prompted to choose a YouTube channel to upload the video to. Please select the same account that you have authorized in the previous steps.
+
+I recommend creating a new YouTube channel specifically for uploading these videos because at the end of the process, we will download all the videos associated with the selected channel ID. This will help keep your uploads organized and separate from your main account. You can find more information on how to create a new YouTube channel [here](https://support.google.com/youtube/answer/1646861?hl=en)
+
+Now we can upload the video on Youtube by running. 
 
 ```
 python upload_youtube.py
 ```
-Before uploading the first video you will be asked to choose a Youtube channel to upload the video to. Please select the same account that you have authorize in the steps before. If you want to create a new Youtube channel just to upload this videos you can do so(I highly suggest it). More information [here](https://support.google.com/youtube/answer/1646861?hl=en). 
+
 
 NOTE: Youtube only allows to upload 6 videos each days via API, so to keep track of which videos have been uploaded to Youtube the script will also create an "uploaded_videos.json" file in which the title of the uploaded videos will be saved. So, next time we run the script we will first check which videos have already been uploaded to Youtube to not uploaded them twice. 
 
-Now that the videos have been uploaded we can retrieve the generated captions
+Now that the videos have been uploaded we can retrieve the generated captions. To so run the 
 
 ## Note 
 
