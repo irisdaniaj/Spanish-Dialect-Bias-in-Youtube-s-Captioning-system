@@ -14,3 +14,4 @@ results/raw/captions/*.srt
 .venv/
 venv/
 .DS_Store
+scripts/responses.json

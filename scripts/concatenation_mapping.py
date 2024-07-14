@@ -173,7 +173,7 @@ if __name__ == "__main__":
         subprocess.run(["ffmpeg", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", "5", silent_audio_path])
 
     # Process LATAM audios
-    process_latam(base_audio_folder_latam, output_folder_latam)
+    #process_latam(base_audio_folder_latam, output_folder_latam)
 
     # Define the base audio folder and output folder for Spain
     base_audio_folder_spain = os.path.join(base_dir, "data/raw/spain/tedx_spain/tedx_spanish_corpus/speech")

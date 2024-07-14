@@ -40,7 +40,6 @@ def get_all_video_ids(channel_id):
             responses = json.load(f)
     else:
         print("Fetching all video IDs...")
-        raise ValueError()
         responses = []
         request = youtube.search().list(
             part="id,snippet",
@@ -77,7 +76,6 @@ def get_captions(video_id, title, output_dir):
             response = json.load(f)
     else:
         print(f"Fetching caption metadata for video '{clean_title}'...")
-        raise ValueError()
         request = youtube.captions().list(
             part="id,snippet",
             videoId=video_id
@@ -100,7 +98,6 @@ def get_captions(video_id, title, output_dir):
             return
         
         print(f"Downloading captions for video {clean_title}...")
-        raise ValueError()
 
         request = youtube.captions().download(
             id=caption_id,
@@ -248,8 +245,6 @@ def parse_vtt(vtt_file, metadata_file, output_dir):
             if caption['start'] >= start and caption['start'] <= end:
                 relevant_captions.append(caption['text'])
 
-        print(relevant_captions)
-
         deduplicated_captions = []
         # remove any captions that are fully contained in another caption,
         # only if they are not "is_timestamp" captions
@@ -296,8 +291,6 @@ if __name__ == "__main__":
     for video_id, title in video_ids:
         # Integrate metadata into captions
         clean_title = title.replace("Title for ", "").replace(".mp4", "")
-        if clean_title != "concatenated_audio_colombian_male":
-            continue
         captions_file = os.path.join(raw_captions_dir, f"{clean_title}.vtt")
         metadata_file = os.path.join("../data", "interim", f"{clean_title.replace('concatenated_audio_', 'mapping_')}.json")
         parse_vtt(captions_file, metadata_file, intermediate_captions_dir)
