@@ -13,8 +13,9 @@ def get_audio_duration(audio_file):
     return float(result.stdout.decode("utf-8"))
 
 DELAY = 5
+MAX_DURATION = 1800
 
-def concatenate_audios(output_folder, country, gender, audio_files, start_times, max_duration=1800):
+def concatenate_audios(output_folder, country, gender, audio_files, start_times, sample_rate):
     processed_filename = f"concatenated_audio_{country}_{gender}.wav"
     output_file = os.path.join(output_folder, processed_filename)
     mapping_filename = f"mapping_{country}_{gender}.json"
@@ -29,26 +30,27 @@ def concatenate_audios(output_folder, country, gender, audio_files, start_times,
     current_chunk_start_times = []
 
     for i, (audio_file, times) in enumerate(zip(audio_files, start_times)):
-        if times["end"] > max_duration:
-            print(f"Reached maximum duration of {max_duration} seconds. Ignoring remaining files.")
+        if times["end"] > MAX_DURATION:
+            print(f"Reached maximum duration of {MAX_DURATION} seconds. Ignoring remaining files.")
             break
 
         current_chunk_files.append(audio_file)
         current_chunk_start_times.append(times)
 
     if current_chunk_files:
-        save_concatenated_audio(output_folder, country, gender, current_chunk_files, current_chunk_start_times)
+        save_concatenated_audio(output_folder, country, gender, current_chunk_files, current_chunk_start_times, sample_rate)
 
-def save_concatenated_audio(output_folder, country, gender, audio_files, start_times):
+def save_concatenated_audio(output_folder, country, gender, audio_files, start_times, sample_rate):
     processed_filename = f"concatenated_audio_{country}_{gender}.wav"
     output_file = os.path.join(output_folder, processed_filename)
 
     # Create a list file for FFmpeg
     list_file_path = os.path.join(output_folder, f"file_list_{country}_{gender}.txt")
+    silent_audio_path = os.path.join(output_folder, f"silence_{sample_rate}.wav")
     with open(list_file_path, "w") as file_list:
         for audio_file in audio_files:
             file_list.write(f"file '{audio_file}'\n")
-            file_list.write("file 'silence.wav'\n")  # Add silence between each file
+            file_list.write(f"file '{silent_audio_path}'\n")
 
     print(f"Concatenating files into {output_file}")
 
@@ -108,7 +110,11 @@ def process_country_genders(country, genders, base_audio_folder, output_folder):
                         start_times.append({"file": file, "start": current_time, "end": end_time, "duration": duration})
                         current_time += duration + DELAY
 
-            concatenate_audios(output_folder, country, gender, audio_files, start_times)
+                        if current_time > MAX_DURATION:
+                            print(f"Reached maximum duration of {MAX_DURATION} seconds. Ignoring remaining files.")
+                            break
+
+            concatenate_audios(output_folder, country, gender, audio_files, start_times, 48000)
         else:
             print(f"Directory does not exist: {gender_path}")
 
@@ -123,7 +129,41 @@ def process_latam(base_audio_folder, output_folder):
 def process_spain(base_audio_folder, output_folder, transcription_file):
     genders = ['female', 'male']
 
-    process_country_genders("spain", genders, base_audio_folder, output_folder)
+    for gender in genders:
+        processed_filename = f"concatenated_audio_spain_{gender}.wav"
+        output_file = os.path.join(output_folder, processed_filename)
+        mapping_filename = f"mapping_spain_{gender}.json"
+        mapping_file = os.path.join(output_folder, mapping_filename)
+        
+        if os.path.exists(output_file) and os.path.exists(mapping_file):
+            print(f"Skipping Spain - {gender} as {processed_filename} and {mapping_filename} already exist.")
+            continue
+
+        gender_path = os.path.join(base_audio_folder, gender)
+        print(f"Checking directory: {gender_path}")
+        if os.path.isdir(gender_path):
+            audio_files = []
+            start_times = []
+            current_time = 0.0
+
+            print(f"Processing Spain - {gender}")
+
+            for _, _, files in os.walk(gender_path):
+                for file in files:
+                    if file.endswith(".wav"):
+                        audio_path = os.path.join(gender_path, file)
+                        duration = get_audio_duration(audio_path)
+                        audio_files.append(audio_path)
+                        start_times.append({"file": file, "start": current_time, "end": current_time + duration, "duration": duration})
+                        current_time += duration + DELAY
+
+                        if current_time > MAX_DURATION:
+                            print(f"Reached maximum duration of {MAX_DURATION} seconds. Ignoring remaining files.")
+                            break
+
+            concatenate_audios(output_folder, 'spain', gender, audio_files, start_times, 16000)
+        else:
+            print(f"Directory does not exist: {gender_path}")
 
 if __name__ == "__main__":
     # Get the directory of the current script
@@ -139,10 +179,15 @@ if __name__ == "__main__":
     # Ensure the output directory exists
     os.makedirs(output_folder_latam, exist_ok=True)
 
-    # Create a 5-second silent audio file with 768077 bitrate
-    silent_audio_path = os.path.join(output_folder_latam, "silence.wav")
-    if not os.path.exists(silent_audio_path):
-        subprocess.run(["ffmpeg", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono", "-t", "5", silent_audio_path])
+    # Create a 5-second silent audio file.
+    # This is for LATAM audios, which are sampled at 48000 Hz.
+    silent_48000_audio_path = os.path.join(output_folder_latam, "silence_48000.wav")
+    if not os.path.exists(silent_48000_audio_path):
+        subprocess.run(["ffmpeg", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono", "-t", "5", silent_48000_audio_path])
+    # This is for Spain audios, which are sampled at 16000 Hz.
+    silent_16000_audio_path = os.path.join(output_folder_latam, "silence_16000.wav")
+    if not os.path.exists(silent_16000_audio_path):
+        subprocess.run(["ffmpeg", "-f", "lavfi", "-i", "anullsrc=r=16000:cl=mono", "-t", "5", silent_16000_audio_path])
 
     # Process LATAM audios
     process_latam(base_audio_folder_latam, output_folder_latam)
