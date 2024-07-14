@@ -23,7 +23,8 @@ TODO:
 - [ ] Nice repo(title, nice description)
 - [ ] force to create new channel
 - [ ] Research better what ASR technoly Youtube/or Google uses
-- [ ] Create QR code for project 
+- [ ] Create QR code for project
+- [ ] TOGLI silence.wav
 
 
 
