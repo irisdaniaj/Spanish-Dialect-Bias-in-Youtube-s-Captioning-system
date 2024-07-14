@@ -12,10 +12,10 @@ import argparse
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 def authenticate():
-    creds = None
+    creds = None 
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-    if not creds or not creds.valid:
+    if not creds or not creds.valid or creds.scopes != SCOPES:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
@@ -41,6 +41,7 @@ def get_all_video_ids(channel_id):
         for item in response['items']:
             if item['id']['kind'] == 'youtube#video':
                 video_ids.append(item['id']['videoId'])
+        print(f"Retrieved {len(video_ids)} video IDs. Fetching more...")
         request = youtube.search().list_next(request, response)
 
     return video_ids
@@ -48,7 +49,13 @@ def get_all_video_ids(channel_id):
 def get_captions(video_id, output_dir):
     creds = authenticate()
     youtube = build("youtube", "v3", credentials=creds)
-    
+
+    output_path = os.path.join(output_dir, "raw", "captions", f"{video_id}.vtt")
+    if os.path.exists(output_path):
+        print(f"Captions for video {video_id} already downloaded.")
+        return
+
+    print(f"Downloading captions for video {video_id}...")
     request = youtube.captions().list(
         part="id",
         videoId=video_id
@@ -65,8 +72,8 @@ def get_captions(video_id, output_dir):
             id=caption_id,
             tfmt="vtt"
         )
+
         caption_response = request.execute()
-        output_path = os.path.join(output_dir, "raw", "captions", f"{video_id}.vtt")
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         with open(output_path, "wb") as caption_file:
             caption_file.write(caption_response)
@@ -113,11 +120,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     
-    # Use relative paths
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    base_dir = os.path.dirname(script_dir)
-    output_dir = os.path.join(base_dir, "results")
-    metadata_file = os.path.join(base_dir, "data", "metadata.json")
+    output_dir = "results"
+    metadata_file = "data/metadata.json"
     
     raw_captions_dir = os.path.join(output_dir, "raw", "captions")
     intermediate_captions_dir = os.path.join(output_dir, "intermediate", "captions_integrated")
@@ -129,7 +133,8 @@ if __name__ == "__main__":
     for video_id in video_ids:
         # Save captions in VTT format
         get_captions(video_id, output_dir)
-        
+    
+    for video_id in video_ids:
         # Integrate metadata into captions
         captions_file = os.path.join(raw_captions_dir, f"{video_id}.vtt")
         integrate_metadata(captions_file, metadata_file, output_dir)

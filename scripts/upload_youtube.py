@@ -14,7 +14,7 @@ def authenticate():
     creds = None
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-    if not creds or not creds.valid:
+    if not creds or not creds.valid or creds.scopes != SCOPES:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:

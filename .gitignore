@@ -7,3 +7,10 @@ token.json
 mapping*.json
 *.log
 *.mp4
+results/intermediate/captions_integrated/*.json
+results/raw/captions/*.json
+results/raw/captions/*.vtt
+results/raw/captions/*.srt
+.venv/
+venv/
+.DS_Store

@@ -3,6 +3,7 @@ import subprocess
 
 
 def convert_audio_to_video(audio_file, image_file, output_file):
+    # Convert to have 480x360 resolution.
     command = [
         "ffmpeg",
         "-loop", "1",
@@ -11,6 +12,7 @@ def convert_audio_to_video(audio_file, image_file, output_file):
         "-c:v", "libx264",
         "-c:a", "aac",
         "-b:a", "192k",
+        "-vf", "scale=480:360",
         "-shortest",
         output_file
     ]

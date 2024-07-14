@@ -26,17 +26,18 @@ def concatenate_audios(output_folder, country, gender, audio_files, start_times,
     current_chunk_files = []
     current_chunk_start_times = []
     current_chunk_duration = 0.0
+    delay = 5.0  # 5 seconds delay between each audio file
 
     for i, (audio_file, times) in enumerate(zip(audio_files, start_times)):
         duration = times["end"] - times["start"]
 
-        if current_chunk_duration + duration > max_duration:
+        if current_chunk_duration + duration + delay > max_duration:
             print(f"Reached maximum duration of {max_duration} seconds. Ignoring remaining files.")
             break
 
         current_chunk_files.append(audio_file)
         current_chunk_start_times.append(times)
-        current_chunk_duration += duration
+        current_chunk_duration += duration + delay
 
     if current_chunk_files:
         save_concatenated_audio(output_folder, country, gender, current_chunk_files, current_chunk_start_times)
@@ -52,6 +53,7 @@ def save_concatenated_audio(output_folder, country, gender, audio_files, start_t
     with open(list_file_path, "w") as file_list:
         for audio_file in audio_files:
             file_list.write(f"file '{audio_file}'\n")
+            file_list.write("file 'silence.wav'\n")  # Add silence between each file
 
     print(f"Concatenating files into {output_file}")
 
@@ -110,7 +112,7 @@ def process_latam(base_audio_folder, output_folder):
                             duration = get_audio_duration(audio_path)
                             audio_files.append(audio_path)
                             start_times.append({"file": file, "start": current_time, "end": current_time + duration})
-                            current_time += duration
+                            current_time += duration + 5.0  # Add 5 seconds delay
 
                 concatenate_audios(output_folder, country, gender, audio_files, start_times)
             else:
@@ -145,7 +147,7 @@ def process_spain(base_audio_folder, output_folder, transcription_file):
                         duration = get_audio_duration(audio_path)
                         audio_files.append(audio_path)
                         start_times.append({"file": file, "start": current_time, "end": current_time + duration})
-                        current_time += duration
+                        current_time += duration + 5.0  # Add 5 seconds delay
 
             concatenate_audios(output_folder, 'spain', gender, audio_files, start_times)
         else:
@@ -164,6 +166,11 @@ if __name__ == "__main__":
 
     # Ensure the output directory exists
     os.makedirs(output_folder_latam, exist_ok=True)
+
+    # Create a 5-second silent audio file
+    silent_audio_path = os.path.join(output_folder_latam, "silence.wav")
+    if not os.path.exists(silent_audio_path):
+        subprocess.run(["ffmpeg", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", "5", silent_audio_path])
 
     # Process LATAM audios
     process_latam(base_audio_folder_latam, output_folder_latam)
