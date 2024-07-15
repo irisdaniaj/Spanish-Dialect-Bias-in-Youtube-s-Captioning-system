@@ -79,7 +79,28 @@ python upload_youtube.py
 
 NOTE: Youtube only allows to upload 6 videos each days via API, so to keep track of which videos have been uploaded to Youtube the script will also create an "uploaded_videos.json" file in which the title of the uploaded videos will be saved. So, next time we run the script we will first check which videos have already been uploaded to Youtube to not uploaded them twice. 
 
-Now that the videos have been uploaded we can retrieve the generated captions. To so run the 
+Now that the videos have been uploaded we can retrieve the generated captions. To so run the captions.py script 
+
+```
+python captions.py -YOUR_CHANNEL_ID
+```
+This will download the captions of all the video uploaded in the channel and it integrates the captions with existing metadata that maps the captions to specific files and speakers and then it saves the processed and integrated captions in JSON format "concatenated_audio_{country}_{gender}.json" in the results/intermediate/captions_integrated" folder. 
+
+If you want to replicate the final results please run 
+
+```
+python analysis.py 
+```
+
+and
+
+```
+python analysis_spain.py 
+```
+
+This script will generate .csv file that contains the filename, generated captions, treu transcription and the word error rate in the the results/final/summary folder along with some summary statistics. 
+
+## Main 
 
 ## Note 
 
