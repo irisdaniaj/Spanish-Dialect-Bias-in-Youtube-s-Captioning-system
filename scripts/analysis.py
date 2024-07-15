@@ -97,6 +97,35 @@ def save_country_overall_summary(countries, female_wers, male_wers, output_file)
     summary_df = pd.DataFrame(summary_data)
     summary_df.to_csv(output_file, index=False)
 
+def save_gender_summary(female_wers, male_wers, output_file):
+    valid_female_wers = [wer for wer in female_wers if wer is not None]
+    valid_male_wers = [wer for wer in male_wers if wer is not None]
+    
+    summary_data = {
+        'gender': ['female', 'male'],
+        'average_wer': [
+            sum(valid_female_wers) / len(valid_female_wers) if valid_female_wers else None,
+            sum(valid_male_wers) / len(valid_male_wers) if valid_male_wers else None
+        ]
+    }
+
+    summary_df = pd.DataFrame(summary_data)
+    summary_df.to_csv(output_file, index=False)
+
+def save_overall_performance(female_wers, male_wers, output_file):
+    valid_female_wers = [wer for wer in female_wers if wer is not None]
+    valid_male_wers = [wer for wer in male_wers if wer is not None]
+    
+    overall_wer = (sum(valid_female_wers) + sum(valid_male_wers)) / (len(valid_female_wers) + len(valid_male_wers))
+    
+    summary_data = {
+        'region': ['LATAM'],
+        'overall_wer': [overall_wer]
+    }
+
+    summary_df = pd.DataFrame(summary_data)
+    summary_df.to_csv(output_file, index=False)
+
 def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     raw_data_dir = os.path.join(base_dir, "../data/raw/LATAM")
@@ -159,24 +188,21 @@ def main():
         female_wers.append(female_wer)
         male_wers.append(male_wer)
 
-    # Save combined results
-    output_file_combined_female = os.path.join(summary_output_dir, "combined_wer_female.csv")
-    output_file_combined_male = os.path.join(summary_output_dir, "combined_wer_male.csv")
-
-    save_combined_results(combined_results_female, output_file_combined_female)
-    save_combined_results(combined_results_male, output_file_combined_male)
-
     # Save overall summary
-    overall_summary_file = os.path.join(summary_output_dir, "overall_wer_summary.csv")
+    overall_summary_file = os.path.join(summary_output_dir, "LATAM_country_gender.csv")
     save_overall_summary(countries, female_wers, male_wers, overall_summary_file)
 
     # Save country overall summary
-    country_overall_summary_file = os.path.join(summary_output_dir, "country_overall_wer_summary.csv")
+    country_overall_summary_file = os.path.join(summary_output_dir, "LATAM_country.csv")
     save_country_overall_summary(countries, female_wers, male_wers, country_overall_summary_file)
 
-    # Save country per gender summary
-    country_per_gender_summary_file = os.path.join(summary_output_dir, "country_per_gender_wer_summary.csv")
-    save_overall_summary(countries, female_wers, male_wers, country_per_gender_summary_file)
+    # Save gender summary
+    gender_summary_file = os.path.join(summary_output_dir, "LATAM_gender.csv")
+    save_gender_summary(female_wers, male_wers, gender_summary_file)
+
+    # Save overall performance
+    overall_performance_file = os.path.join(summary_output_dir, "LATAM_overall.csv")
+    save_overall_performance(female_wers, male_wers, overall_performance_file)
 
 if __name__ == "__main__":
     main()
