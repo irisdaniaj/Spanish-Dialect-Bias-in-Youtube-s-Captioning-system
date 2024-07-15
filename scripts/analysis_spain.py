@@ -146,10 +146,6 @@ def main():
         output_file = os.path.join(summary_output_dir, f"wer_comparison_spain_{gender}.csv")
         save_results(results, output_file)
 
-        # Save detailed results
-        detailed_output_file = os.path.join(summary_output_dir, f"detailed_wer_comparison_spain_{gender}.csv")
-        save_detailed_results(results, detailed_output_file)
-
         if gender == 'female':
             combined_results_female.extend(results)
             if results:
@@ -167,19 +163,13 @@ def main():
                 male_wer = None
             male_wers.append(male_wer)
 
-    # Save combined results
-    output_file_combined_female = os.path.join(summary_output_dir, "combined_wer_female.csv")
-    output_file_combined_male = os.path.join(summary_output_dir, "combined_wer_male.csv")
-
-    save_combined_results(combined_results_female, output_file_combined_female)
-    save_combined_results(combined_results_male, output_file_combined_male)
 
     # Save overall summary
-    overall_summary_file = os.path.join(summary_output_dir, "overall_wer_summary.csv")
+    overall_summary_file = os.path.join(summary_output_dir, "gender_spain.csv")
     save_overall_summary([country], female_wers, male_wers, overall_summary_file)
 
     # Calculate and save overall WER
-    overall_wer_file = os.path.join(summary_output_dir, "overall_wer.csv")
+    overall_wer_file = os.path.join(summary_output_dir, "overall_spain.csv")
     combined_all_results = combined_results_female + combined_results_male
     if combined_all_results:
         overall_wer = wer(" ".join([result['true_transcription'] for result in combined_all_results]),
