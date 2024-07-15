@@ -123,7 +123,7 @@ The best perfomance is achieved by speakers from Puerto Rico, while speakers fro
 
 **Computational Resources**
 
-One of the primary challenges we face is managing computational resources. Processing and analyzing large volumes of audio data, converting them into video format, and running comparisons between YouTube captions and ground truth transcriptions require significant computing power which I did not had access to. The videos are just 30 minutes each even if we have hours of audio for each country avaible. In the future it will be intresting to upload longer videos. 
+One of the primary challenges we face is managing computational resources. Processing and analyzing large volumes of audio data, converting them into video format, and running comparisons between YouTube captions and ground truth transcriptions require significant computing power, which I did not have access to. Consequently, the videos are limited to 30 minutes each, even though we have hours of audio available for each country. In the future, it will be interesting to upload longer videos to fully utilize the available audio data.
 
 **YouTube API Limitations**
 
