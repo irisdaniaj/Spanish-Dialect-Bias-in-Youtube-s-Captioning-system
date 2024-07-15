@@ -61,6 +61,42 @@ def save_combined_results(results, output_file):
     results_df = pd.DataFrame([{'combined_word_error_rate': combined_wer}])
     results_df.to_csv(output_file, index=False)
 
+def save_overall_summary(countries, female_wers, male_wers, output_file):
+    summary_data = {
+        'country': [],
+        'wer_F': [],
+        'wer_M': []
+    }
+    
+    for country, female_wer, male_wer in zip(countries, female_wers, male_wers):
+        summary_data['country'].append(country)
+        summary_data['wer_F'].append(female_wer)
+        summary_data['wer_M'].append(male_wer)
+    
+    summary_df = pd.DataFrame(summary_data)
+    summary_df.to_csv(output_file, index=False)
+
+def save_country_overall_summary(countries, female_wers, male_wers, output_file):
+    summary_data = {
+        'country': [],
+        'overall_wer': []
+    }
+    
+    for country, female_wer, male_wer in zip(countries, female_wers, male_wers):
+        combined_wer = None
+        if female_wer is not None and male_wer is not None:
+            combined_wer = (female_wer + male_wer) / 2
+        elif female_wer is not None:
+            combined_wer = female_wer
+        elif male_wer is not None:
+            combined_wer = male_wer
+        
+        summary_data['country'].append(country)
+        summary_data['overall_wer'].append(combined_wer)
+    
+    summary_df = pd.DataFrame(summary_data)
+    summary_df.to_csv(output_file, index=False)
+
 def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     raw_data_dir = os.path.join(base_dir, "../data/raw/LATAM")
@@ -75,7 +111,13 @@ def main():
     combined_results_female = []
     combined_results_male = []
 
+    female_wers = []
+    male_wers = []
+
     for country in countries:
+        country_female_results = []
+        country_male_results = []
+        
         for gender in genders:
             if country == 'puerto_rican' and gender == 'male':
                 continue
@@ -96,8 +138,26 @@ def main():
 
             if gender == 'female':
                 combined_results_female.extend(results)
+                country_female_results.extend(results)
             else:
                 combined_results_male.extend(results)
+                country_male_results.extend(results)
+        
+        # Calculate and save WER for each country
+        if country_female_results:
+            female_wer = wer(" ".join([result['true_transcription'] for result in country_female_results]),
+                             " ".join([result['generated_caption'] for result in country_female_results]))
+        else:
+            female_wer = None
+        
+        if country_male_results:
+            male_wer = wer(" ".join([result['true_transcription'] for result in country_male_results]),
+                           " ".join([result['generated_caption'] for result in country_male_results]))
+        else:
+            male_wer = None
+        
+        female_wers.append(female_wer)
+        male_wers.append(male_wer)
 
     # Save combined results
     output_file_combined_female = os.path.join(summary_output_dir, "combined_wer_female.csv")
@@ -105,6 +165,18 @@ def main():
 
     save_combined_results(combined_results_female, output_file_combined_female)
     save_combined_results(combined_results_male, output_file_combined_male)
+
+    # Save overall summary
+    overall_summary_file = os.path.join(summary_output_dir, "overall_wer_summary.csv")
+    save_overall_summary(countries, female_wers, male_wers, overall_summary_file)
+
+    # Save country overall summary
+    country_overall_summary_file = os.path.join(summary_output_dir, "country_overall_wer_summary.csv")
+    save_country_overall_summary(countries, female_wers, male_wers, country_overall_summary_file)
+
+    # Save country per gender summary
+    country_per_gender_summary_file = os.path.join(summary_output_dir, "country_per_gender_wer_summary.csv")
+    save_overall_summary(countries, female_wers, male_wers, country_per_gender_summary_file)
 
 if __name__ == "__main__":
     main()
