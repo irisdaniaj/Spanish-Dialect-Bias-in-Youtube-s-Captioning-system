@@ -5,28 +5,6 @@ Spanish is the official language of 21 countries and is spoken by over 441 milli
 My research aims to answer this question. To do so, we will use Google's [Crowdsourcing Latin American Spanish for Low-Resource Text-to-Speech](https://aclanthology.org/2020.lrec-1.801.pdf) and the [TEDx Spanish Corpus](https://www.openslr.org/67/) datasets.
 
 
-Recap so far: 
-- [ ] I tried to upload them separely but I did exceed the daily Youtube's API quotas of videos that I can upload in a day, so I have created a one big .wav file with all the audios divided per gender together.
-- [ ] Also changing in the internal structure to make worj easier(female and male rename for LATAM and female and male folder creation for spain).
-- [ ] Concatenate and create the mapping.json file, all files will be saved in the data/interim folder
-- [ ] now we need to convert the .wav into vidoes because yt only accept videos, to do so we will use a simple black image and convert from .wab to .mp4
-
-TODO: 
-- [ ] Upload stuff to youtube and get the captions
-- [ ] Donwload the captions
-- [ ] git clone
-- [ ] requirements.txt 
-- [ ] compare them to the trascript
-- [ ] which metric to use?
-- [ ] think of nice comparison and visualization(male vs female) --> how do i keep track of the females and male texts?
-- [ ] maybe think if to use some metric from the class
-- [ ] Nice repo(title, nice description)
-- [ ] force to create new channel
-- [ ] Research better what ASR technoly Youtube/or Google uses
-- [ ] Create QR code for project
-- [ ] TOGLI silence.wav
-
-
 
 
 ## Data Download
@@ -37,6 +15,18 @@ After the download you can put the data into the correspective folders. Note: Th
 
 ## Main 
 
+Clone the repository 
+
+```
+git clone https://github.com/irisdaniaj/Spanish-Dialect-Bias-in-Youtube-s-Captioning-system.git
+```
+and create a conda environment using the requirements.txt file 
+
+```
+conda create --name myenv python=3.9
+conda activate myenv
+pip install -r requirements.txt
+```
 After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the the spain folder). 
 Move to the scripts directory since we will run all the scripts from here. 
 ```
@@ -128,6 +118,30 @@ The best captions are generated for females speaker from Puerto Rico, while the 
 | Venezuela | 0.22 | 
 
 The best perfomance is achieved by speakers from Puerto Rico, while speakers from Argentina have the highest WER score. The difference between the best and worst perfomance is 0.08 indicating a noticeable gap in the quality of the generated captions. 
+
+## Limitations and Future Directions 
+
+**Computational Resources**
+
+One of the primary challenges we face is managing computational resources. Processing and analyzing large volumes of audio data, converting them into video format, and running comparisons between YouTube captions and ground truth transcriptions require significant computing power which I did not had access to. The videos are just 30 minutes each even if we have hours of audio for each country avaible. In the future it will be intresting to upload longer videos. 
+
+**YouTube API Limitations**
+
+An important consideration is the limitations imposed by the YouTube API. While the API enables automated video uploads and caption retrieval, it restricts the number of requests that can be made within a specific time frame. These restrictions can slow down data processing and analysis, necessitating strategic planning of uploads and retrievals to avoid exceeding these limits. For example, I was able to upload only six videos per day via the API, and there is also a cap on the number of videos one can upload manually through YouTube Studio. Additionally, the YouTube credit system limits the number of captions that can be retrieved in a day, which significantly slowed my progress.
+
+**Geographic Coverage**
+
+Geographic coverage is another crucial aspect. Our dataset includes various Spanish dialects from different regions, but ensuring comprehensive coverage is challenging. Some dialects may be underrepresented, which can impact the robustness of our analysis. Expanding the dataset to include a broader range of dialects from more countries will improve the reliability of our findings and provide a more thorough assessment of potential biases in YouTube's captioning system.
+
+**Identifying Specific Sounds**
+
+It would be interesting to explore whether there are specific sounds in the Spanish Dialects that YouTube's captioning system struggles with more than others. Identifying these problematic sounds could provide insights into the system's limitations and areas for improvement.
+
+**Comparative Analysis**
+
+A broader comparative analysis of YouTube's captioning system across different languages could also be valuable. By comparing the accuracy of captions in various languages, we can gain a deeper understanding of the system's performance and potential biases. This could help in identifying areas where the captioning system may need adjustments to better handle linguistic diversity.
+
+
 
 ## Note 
 
