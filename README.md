@@ -79,7 +79,7 @@ python upload_youtube.py
 
 NOTE: Youtube only allows to upload 6 videos each days via API, so to keep track of which videos have been uploaded to Youtube the script will also create an "uploaded_videos.json" file in which the title of the uploaded videos will be saved. So, next time we run the script we will first check which videos have already been uploaded to Youtube to not uploaded them twice. 
 
-Now that the videos have been uploaded we can retrieve the generated captions. To so run the captions.py script 
+Now that the videos have been uploaded we can retrieve the generated captions. To do so we will need the ID of the Youtube channel in which we uploaded the videos. More information [here](https://support.google.com/youtube/answer/3250431?hl=en). 
 
 ```
 python captions.py -YOUR_CHANNEL_ID
@@ -100,7 +100,34 @@ python analysis_spain.py
 
 This script will generate .csv file that contains the filename, generated captions, treu transcription and the word error rate in the the results/final/summary folder along with some summary statistics. 
 
-## Main 
+## Results 
+
+
+The following Table report the Word-Error-rate(WER) for each country and gender. The WER is the ratio of errors in a transcript to the total words spoken. A lower WER in speech-to-text means better accuracy in recognizing speech. For example, a 20% WER means the transcript is 80% accurate. 
+
+| Country | WER Female | WER Male |
+|----------|----------|----------|
+| Argentina | 0.24 | 0.23 |
+| Chile | 0.21 | 0.22 |
+| Colombia | 0.22 | 0.22 |
+| Spain | 0.19 | 0.20 |
+| Peru | 0.20 | 0.20  |
+| Puero Rico | 0.16 | - |
+| Venezuela | 0.23 | 0.21 |
+
+The best captions are generated for females speaker from Puerto Rico, while the worst performance is achieved for Argentinian females speakers.
+
+| Country | WER  | 
+|----------|----------|
+| Argentina | 0.24 | 
+| Chile | 0.22 | 
+| Colombia | 0.22 | 
+| Spain | 0.20 | 
+| Peru | 0.20 | 
+| Puero Rico | 0.16 |
+| Venezuela | 0.22 | 
+
+The best perfomance is achieved by speakers from Puerto Rico, while speakers from Argentina have the highest WER score. The difference between the best and worst perfomance is 0.08 indicating a noticeable gap in the quality of the generated captions. 
 
 ## Note 
 
