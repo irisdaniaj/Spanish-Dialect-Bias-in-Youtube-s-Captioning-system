@@ -141,8 +141,14 @@ It would be interesting to explore whether there are specific sounds in the Span
 
 A broader comparative analysis of YouTube's captioning system across different languages could also be valuable. By comparing the accuracy of captions in various languages, we can gain a deeper understanding of the system's performance and potential biases. This could help in identifying areas where the captioning system may need adjustments to better handle linguistic diversity.
 
+## Conclusion 
 
+In conclusion, this study has provided valuable insights into the performance of YouTube's ASR system across different Spanish dialects, with a particular focus on gender-based differences. While the system demonstrated relatively strong performance for Puerto Rican female speakers, the results also highlighted significant disparities, such as the higher WER for Argentinian speakers and the unexpected lack of improved accuracy for genders with more available training data. These findings underscore the need for further research to better understand the linguistic and technical factors that influence Youtube's ASR performance. Future studies should aim to broaden the scope of analysis to include a wider range of dialects and demographics, such as different age groups and underrepresented regions like Equatorial Guinea. Additionally, exploring phoneme-level challenges and conducting cross-platform comparisons will be crucial in identifying specific areas for improvement. Overcoming the current limitations related to data utilization and API constraints will be essential for enabling more comprehensive evaluations and driving advancements in ASR technology, ultimately contributing to more inclusive and accurate speech recognition systems.
 
 ## Note 
 
 This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
+
+## Acknowledgements 
+
+I would to thank you Adrian David Castro Tenemaya for his technical support. 
