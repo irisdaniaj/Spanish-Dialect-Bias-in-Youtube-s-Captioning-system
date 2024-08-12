@@ -115,7 +115,7 @@ In conclusion, this study has provided valuable insights into the performance of
 
 ## Note 
 
-This repository contain my final project for the Advanced Method in Social Science class at the Univerisity of Munich. 
+This repository contain my final project for the Advanced Methods in Social Statistics and Social Data Science, Summer Semester 2024 class at the Univerisity of Munich. 
 
 ## Acknowledgements 
 
