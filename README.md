@@ -108,6 +108,8 @@ As shown in bar plot above, it's important to highlight that no data was availab
 
 In contrast, in Venezuela and Argentina, male speakers achieved a lower WER, indicating better performance in the generated captions compared to their female counterparts. The performance gap between genders in these countries is more pronounced than in the other regions, suggesting that regional differences in gender-influenced speech characteristics might not be effectively captured by the ASR system.
 
+For a comprehensive analysis of the results and an in-depth overview of the entire project, please refer to the full report.
+
 
 ## Conclusion 
 
