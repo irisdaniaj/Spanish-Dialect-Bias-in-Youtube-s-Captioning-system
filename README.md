@@ -97,38 +97,17 @@ To evaluate the accuracy of the generated captions in comparison to the annotate
 
 ![Alt text](results/final/plots/wer_by_country.png)
 
-The above bar plot in illustrates the WER obtained for each country included in the study. Youtube's ASR achieved the best performance for speakers from Puerto Rico with a WER of 16\%, indicating that 84\% of the generated captions accurately matched the ground truth annotations, suggesting that the ASR system has a relatively high level of accuracy when transcribing the Puerto Rican dialect, which is part of the Caribbean dialect. Following Puerto Rican dialect, Youtube's ASR exhibited strong performance on both Castillian and Peruan dialects, each with a WER of 20\%. For Chilean and Colombian speakers, the generated captions were accurate in 78\% of cases, corresponding to a WER of 22\%. The worst performance was observed for Argentinian speakers, who experienced a WER of 24\%, meaning that only 76\% of the captions matched the reference transcriptions. \\
+The above bar plot in illustrates the WER obtained for each country included in the study. Youtube's ASR achieved the best performance for speakers from Puerto Rico with a WER of 16\%, indicating that 84\% of the generated captions accurately matched the ground truth annotations, suggesting that the ASR system has a relatively high level of accuracy when transcribing the Puerto Rican dialect, which is part of the Caribbean dialect. Following Puerto Rican dialect, Youtube's ASR exhibited strong performance on both Castillian and Peruan dialects, each with a WER of 20\%. For Chilean and Colombian speakers, the generated captions were accurate in 78\% of cases, corresponding to a WER of 22\%. The worst performance was observed for Argentinian speakers, who experienced a WER of 24\%, meaning that only 76\% of the captions matched the reference transcriptions. 
+
 It's important to highlight the considerable difference in performance between the best (Puerto Rico, 16\% WER) and worst (Argentina, 24\% WER) results, with an 8\% gap in WER, which is quite significant. This performance gap indicates that while the Youtube's ASR system may be generally effective, there are clear disparities in how well it handles different Spanish dialects. Understanding the root causes of these disparities could be a critical area for future research, as it may point to specific phonetic or lexical features that the ASR system struggles with.
 
 ![Alt text](results/final/plots/wer_by_country_and_gender.png)
 
 
-As shown in bar plot above, it's important to highlight that no data was available for male Puerto Rican speakers, which limits our ability to draw conclusions about gender-based performance for this dialect. However, in the cases of Chile, Colombia, Peru, and Spain, male speakers exhibited higher Word Error Rates compared to female speakers within the same dialects. This suggests that YouTube's ASR system may be slightly more attuned to the speech patterns of female speakers in these countries, although the difference between male and female WER is relatively small. \\
+As shown in bar plot above, it's important to highlight that no data was available for male Puerto Rican speakers, which limits our ability to draw conclusions about gender-based performance for this dialect. However, in the cases of Chile, Colombia, Peru, and Spain, male speakers exhibited higher Word Error Rates compared to female speakers within the same dialects. This suggests that YouTube's ASR system may be slightly more attuned to the speech patterns of female speakers in these countries, although the difference between male and female WER is relatively small. 
+
 In contrast, in Venezuela and Argentina, male speakers achieved a lower WER, indicating better performance in the generated captions compared to their female counterparts. The performance gap between genders in these countries is more pronounced than in the other regions, suggesting that regional differences in gender-influenced speech characteristics might not be effectively captured by the ASR system.
 
-
-
-## Limitations and Future Directions 
-
-**Computational Resources**
-
-One of the primary challenges we face is managing computational resources. Processing and analyzing large volumes of audio data, converting them into video format, and running comparisons between YouTube captions and ground truth transcriptions require significant computing power, which I did not have access to. Consequently, the videos are limited to 30 minutes each, even though we have hours of audio available for each country. In the future, it will be interesting to upload longer videos to fully utilize the available audio data.
-
-**YouTube API Limitations**
-
-An important consideration is the limitations imposed by the YouTube API. While the API enables automated video uploads and caption retrieval, it restricts the number of requests that can be made within a specific time frame. These restrictions can slow down data processing and analysis, necessitating strategic planning of uploads and retrievals to avoid exceeding these limits. For example, I was able to upload only six videos per day via the API, and there is also a cap on the number of videos one can upload manually through YouTube Studio. Additionally, the YouTube credit system limits the number of captions that can be retrieved in a day, which significantly slowed my progress.
-
-**Geographic Coverage**
-
-Geographic coverage is another crucial aspect. Our dataset includes various Spanish dialects from different regions, but ensuring comprehensive coverage is challenging. Some dialects may be underrepresented, which can impact the robustness of our analysis. Expanding the dataset to include a broader range of dialects from more countries will improve the reliability of our findings and provide a more thorough assessment of potential biases in YouTube's captioning system.
-
-**Identifying Specific Sounds**
-
-It would be interesting to explore whether there are specific sounds in the Spanish Dialects that YouTube's captioning system struggles with more than others. Identifying these problematic sounds could provide insights into the system's limitations and areas for improvement.
-
-**Comparative Analysis**
-
-A broader comparative analysis of YouTube's captioning system across different languages could also be valuable. By comparing the accuracy of captions in various languages, we can gain a deeper understanding of the system's performance and potential biases. This could help in identifying areas where the captioning system may need adjustments to better handle linguistic diversity.
 
 ## Conclusion 
 
