@@ -93,31 +93,12 @@ This script will generate .csv file that contains the filename, generated captio
 ## Results 
 
 
-The following Table report the Word-Error-rate(WER) for each country and gender. The WER is the ratio of errors in a transcript to the total words spoken. A lower WER in speech-to-text means better accuracy in recognizing speech. For example, a 20% WER means the transcript is 80% accurate. 
+To evaluate the accuracy of the generated captions in comparison to the annotated ground truth data, I employed the Word-Error-Rate (WER) metric. A lower WER indicates better accuracy in recognizing speech. For instance, a WER of 20\% implies that the transcription is 80\% accurate.
+![Alt text](results/final/plots/wer_by_country.png)
 
-| Country | WER Female | WER Male |
-|----------|----------|----------|
-| Argentina | 0.24 | 0.23 |
-| Chile | 0.21 | 0.22 |
-| Colombia | 0.22 | 0.22 |
-| Spain | 0.19 | 0.20 |
-| Peru | 0.20 | 0.20  |
-| Puero Rico | 0.16 | - |
-| Venezuela | 0.23 | 0.21 |
+The above bar plot in illustrates the WER obtained for each country included in the study. Youtube's ASR achieved the best performance for speakers from Puerto Rico with a WER of 16\%, indicating that 84\% of the generated captions accurately matched the ground truth annotations, suggesting that the ASR system has a relatively high level of accuracy when transcribing the Puerto Rican dialect, which is part of the Caribbean dialect. Following Puerto Rican dialect, Youtube's ASR exhibited strong performance on both Castillian and Peruan dialects, each with a WER of 20\%. For Chilean and Colombian speakers, the generated captions were accurate in 78\% of cases, corresponding to a WER of 22\%. The worst performance was observed for Argentinian speakers, who experienced a WER of 24\%, meaning that only 76\% of the captions matched the reference transcriptions.
 
-The best captions are generated for females speaker from Puerto Rico, while the worst performance is achieved for Argentinian females speakers.
 
-| Country | WER  | 
-|----------|----------|
-| Argentina | 0.24 | 
-| Chile | 0.22 | 
-| Colombia | 0.22 | 
-| Spain | 0.20 | 
-| Peru | 0.20 | 
-| Puero Rico | 0.16 |
-| Venezuela | 0.22 | 
-
-The best perfomance is achieved by speakers from Puerto Rico, while speakers from Argentina have the highest WER score. The difference between the best and worst perfomance is 0.08 indicating a noticeable gap in the quality of the generated captions. 
 
 ## Limitations and Future Directions 
 
