@@ -7,6 +7,8 @@ token.json
 mapping*.json
 *.log
 *.mp4
+*.csv
+*.png
 results/intermediate/captions_integrated/*.json
 results/raw/captions/*.json
 results/raw/captions/*.vtt
