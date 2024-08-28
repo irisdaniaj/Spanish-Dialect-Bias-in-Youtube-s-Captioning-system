@@ -23,9 +23,7 @@ git clone https://github.com/irisdaniaj/Spanish-Dialect-Bias-in-Youtube-s-Captio
 and create a conda environment using the requirements.txt file 
 
 ```
-conda create --name myenv python=3.9
-conda activate myenv
-pip install -r requirements.txt
+conda create --name myenv --file requirements.txt
 ```
 After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the the spain folder). 
 Move to the scripts directory since we will run all the scripts from here. 
