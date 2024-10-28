@@ -6,13 +6,12 @@ import matplotlib.pyplot as plt
 # Function to create and save bar plots
 def create_and_save_barplot(data, x, y, hue, title, xlabel, ylabel, output_filename, color=None, palette=None):
     plt.figure(figsize=(10, 6))
-    sns.barplot(x=x, y=y, hue=hue, data=data, color= color, palette=palette)
+    sns.barplot(x=x, y=y, hue=hue, data=data, color=color, palette=palette)
 
     # Customize the plot
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.ylim(0.15, 0.30)  # Adjust this range based on your data
     plt.xticks(rotation=30)
     plt.tight_layout()
 
@@ -25,11 +24,11 @@ def create_and_save_barplot(data, x, y, hue, title, xlabel, ylabel, output_filen
     # Show the plot
     plt.show()
 
-
-
 # Load and plot the overall_country.csv data
 overall_country_csv = '../results/final/summary/overall_country.csv'
 overall_country_data = pd.read_csv(overall_country_csv)
+
+# Plot for WER
 create_and_save_barplot(
     data=overall_country_data,
     x='country',
@@ -42,19 +41,52 @@ create_and_save_barplot(
     color="forestgreen"
 )
 
+# Plot for CER
+create_and_save_barplot(
+    data=overall_country_data,
+    x='country',
+    y='overall_cer',
+    hue=None,
+    title='Character Error Rate (CER) by Country',
+    xlabel='Country',
+    ylabel='Character Error Rate',
+    output_filename='cer_by_country.png', 
+    color="royalblue"
+)
+
+# Plot for Recall
+create_and_save_barplot(
+    data=overall_country_data,
+    x='country',
+    y='overall_recall',
+    hue=None,
+    title='Recall by Country',
+    xlabel='Country',
+    ylabel='Recall',
+    output_filename='recall_by_country.png', 
+    color="darkorange"
+)
+
 # Load and reshape the overall_country_gender.csv data
 overall_country_gender_csv = '../results/final/summary/overall_country_gender.csv'
 overall_country_gender_data = pd.read_csv(overall_country_gender_csv)
 
-# Assuming the file has columns 'country', 'wer_F', and 'wer_M'
-# Melt the data to have 'country', 'gender', and 'wer' columns
-melted_data = pd.melt(overall_country_gender_data, id_vars='country', value_vars=['wer_F', 'wer_M'], 
-                      var_name='gender', value_name='wer')
-melted_data['gender'] = melted_data['gender'].map({'wer_F': 'Female', 'wer_M': 'Male'})
+# Melt the data to have 'country', 'gender', and the metrics columns
+melted_data_wer = pd.melt(overall_country_gender_data, id_vars='country', value_vars=['wer_F', 'wer_M'], 
+                          var_name='gender', value_name='wer')
+melted_data_cer = pd.melt(overall_country_gender_data, id_vars='country', value_vars=['cer_F', 'cer_M'], 
+                          var_name='gender', value_name='cer')
+melted_data_recall = pd.melt(overall_country_gender_data, id_vars='country', value_vars=['recall_F', 'recall_M'], 
+                             var_name='gender', value_name='recall')
 
-# Create the bar plot for WER by country and gender
+# Map gender values
+melted_data_wer['gender'] = melted_data_wer['gender'].map({'wer_F': 'Female', 'wer_M': 'Male'})
+melted_data_cer['gender'] = melted_data_cer['gender'].map({'cer_F': 'Female', 'cer_M': 'Male'})
+melted_data_recall['gender'] = melted_data_recall['gender'].map({'recall_F': 'Female', 'recall_M': 'Male'})
+
+# Create bar plots for WER, CER, and Recall by country and gender
 create_and_save_barplot(
-    data=melted_data,
+    data=melted_data_wer,
     x='country',
     y='wer',
     hue='gender',
@@ -62,22 +94,74 @@ create_and_save_barplot(
     xlabel='Country',
     ylabel='Word Error Rate',
     output_filename='wer_by_country_and_gender.png', 
-    palette= ["mediumpurple", "orange"]
+    palette=["mediumpurple", "orange"]
+)
+
+create_and_save_barplot(
+    data=melted_data_cer,
+    x='country',
+    y='cer',
+    hue='gender',
+    title='Character Error Rate (CER) by Country and Gender',
+    xlabel='Country',
+    ylabel='Character Error Rate',
+    output_filename='cer_by_country_and_gender.png', 
+    palette=["mediumblue", "lightcoral"]
+)
+
+create_and_save_barplot(
+    data=melted_data_recall,
+    x='country',
+    y='recall',
+    hue='gender',
+    title='Recall by Country and Gender',
+    xlabel='Country',
+    ylabel='Recall',
+    output_filename='recall_by_country_and_gender.png', 
+    palette=["gold", "teal"]
 )
 
 # Load and plot the gender.csv data
 gender_csv = '../results/final/summary/gender.csv'
 gender_data = pd.read_csv(gender_csv)
+
+# Plot for WER by Gender
 create_and_save_barplot(
     data=gender_data,
     x='gender',
-    y='wer',  # Adjust this based on the actual column name
+    y='wer',
     hue=None,
     title='Word Error Rate (WER) by Gender',
     xlabel='Gender',
     ylabel='Word Error Rate',
     output_filename='wer_by_gender.png', 
-    palette= ["mediumpurple", "orange"]
+    palette=["mediumpurple", "orange"]
+)
+
+# Plot for CER by Gender
+create_and_save_barplot(
+    data=gender_data,
+    x='gender',
+    y='cer',
+    hue=None,
+    title='Character Error Rate (CER) by Gender',
+    xlabel='Gender',
+    ylabel='Character Error Rate',
+    output_filename='cer_by_gender.png', 
+    palette=["mediumblue", "lightcoral"]
+)
+
+# Plot for Recall by Gender
+create_and_save_barplot(
+    data=gender_data,
+    x='gender',
+    y='recall',
+    hue=None,
+    title='Recall by Gender',
+    xlabel='Gender',
+    ylabel='Recall',
+    output_filename='recall_by_gender.png', 
+    palette=["gold", "teal"]
 )
 
 # Load and plot the LATAM vs Spain data
@@ -88,14 +172,41 @@ LATAM_spain_data = pd.read_csv(latam_spain_csv)
 LATAM_spain_data.columns = LATAM_spain_data.columns.str.strip()
 LATAM_spain_data['Country'] = LATAM_spain_data['Country'].str.strip()
 
+# Plot for WER by Country (LATAM vs Spain)
 create_and_save_barplot(
     data=LATAM_spain_data,
-    x='Country',  # Ensure this is the correct column name
-    y='wer',  # Ensure this is the correct column name
+    x='Country',
+    y='wer',
     hue=None,
     title='Word Error Rate (WER) by Country (LATAM vs Spain)',
     xlabel='Country',
     ylabel='Word Error Rate',
     output_filename='wer_LATAM_vs_Spain.png', 
     palette=["goldenrod", "firebrick"]
+)
+
+# Plot for CER by Country (LATAM vs Spain)
+create_and_save_barplot(
+    data=LATAM_spain_data,
+    x='Country',
+    y='cer',
+    hue=None,
+    title='Character Error Rate (CER) by Country (LATAM vs Spain)',
+    xlabel='Country',
+    ylabel='Character Error Rate',
+    output_filename='cer_LATAM_vs_Spain.png', 
+    palette=["dodgerblue", "tomato"]
+)
+
+# Plot for Recall by Country (LATAM vs Spain)
+create_and_save_barplot(
+    data=LATAM_spain_data,
+    x='Country',
+    y='recall',
+    hue=None,
+    title='Recall by Country (LATAM vs Spain)',
+    xlabel='Country',
+    ylabel='Recall',
+    output_filename='recall_LATAM_vs_Spain.png', 
+    palette=["darkorange", "seagreen"]
 )
