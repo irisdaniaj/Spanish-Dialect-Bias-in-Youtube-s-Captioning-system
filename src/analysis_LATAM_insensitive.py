@@ -31,6 +31,7 @@ def calculate_error_rates(captions_data, transcription_data, case_sensitive=True
             generated_caption = entry['captions']
             true_transcription = transcription_data[transcription_data['filename'] == filename]['transcription'].values[0]
             
+            # Force lowercase for case-insensitive calculation
             if not case_sensitive:
                 generated_caption = generated_caption.lower()
                 true_transcription = true_transcription.lower()
@@ -218,13 +219,14 @@ def main():
             if captions_data is None or transcription_data is None:
                 continue
 
-            # Calculate WER, CER, and recall
-            results = calculate_error_rates(captions_data, transcription_data, case_sensitive=True)
+            # Calculate WER, CER, and recall using case-insensitive mode
+            results = calculate_error_rates(captions_data, transcription_data, case_sensitive=False)
 
-            # Save individual results
-            output_file = os.path.join(summary_output_dir, f"error_rates_comparison_{country}_{gender}.csv")
+            # Save individual results with '_insensitive' in the file name
+            output_file = os.path.join(summary_output_dir, f"error_rates_comparison_{country}_{gender}_insensitive.csv")
             save_results(results, output_file)
 
+            # Collect all results for overall summary calculations
             if gender == 'female':
                 combined_results_female.extend(results)
                 country_female_results.extend(results)
@@ -232,7 +234,7 @@ def main():
                 combined_results_male.extend(results)
                 country_male_results.extend(results)
         
-        # Calculate and save WER, CER, and recall for each country
+        # Calculate and save WER, CER, and recall for each country (female vs. male)
         if country_female_results:
             female_wer = wer(" ".join([result['true_transcription'] for result in country_female_results]),
                              " ".join([result['generated_caption'] for result in country_female_results]))
@@ -265,19 +267,19 @@ def main():
         male_recalls.append(male_recall)
 
     # Save overall summary
-    overall_summary_file = os.path.join(summary_output_dir, "LATAM_country_gender.csv")
+    overall_summary_file = os.path.join(summary_output_dir, "LATAM_country_gender_insensitive.csv")
     save_overall_summary(countries, female_wers, male_wers, female_cers, male_cers, female_recalls, male_recalls, overall_summary_file)
 
     # Save country overall summary
-    country_overall_summary_file = os.path.join(summary_output_dir, "LATAM_country.csv")
+    country_overall_summary_file = os.path.join(summary_output_dir, "LATAM_country_insensitive.csv")
     save_country_overall_summary(countries, female_wers, male_wers, female_cers, male_cers, female_recalls, male_recalls, country_overall_summary_file)
 
     # Save gender summary
-    gender_summary_file = os.path.join(summary_output_dir, "LATAM_gender.csv")
+    gender_summary_file = os.path.join(summary_output_dir, "LATAM_gender_insensitive.csv")
     save_gender_summary(female_wers, male_wers, female_cers, male_cers, female_recalls, male_recalls, gender_summary_file)
 
     # Save overall performance
-    overall_performance_file = os.path.join(summary_output_dir, "LATAM_overall.csv")
+    overall_performance_file = os.path.join(summary_output_dir, "LATAM_overall_insensitive.csv")
     save_overall_performance(female_wers, male_wers, female_cers, male_cers, female_recalls, male_recalls, overall_performance_file)
 
 if __name__ == "__main__":

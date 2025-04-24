@@ -12,6 +12,11 @@ import srt
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 CAPTIONS_FORMAT = "srt"
 
+SPECIFIC_TITLES = [
+    "Title for concatenated_audio_mexico_female.mp4",
+    "Title for concatenated_audio_mexico_male.mp4"
+]
+
 def authenticate():
     creds = None 
     if os.path.exists("token.json"):
@@ -31,8 +36,6 @@ def get_all_video_ids(channel_id):
     youtube = build("youtube", "v3", credentials=creds)
 
     video_ids = []
-    # Load responses from disk if available.
-    # It is expensive to fetch all video IDs, so we cache the responses.
     if os.path.exists("responses.json"):
         print("Found cached responses. Loading...")
         with open("responses.json", "r") as f:
@@ -49,16 +52,14 @@ def get_all_video_ids(channel_id):
         while request:
             response = request.execute()
             responses.append(response)
-            print(f"Retrieved {len(video_ids)} video IDs.")
             request = youtube.search().list_next(request, response)
 
-        # Save responses to disk
         with open("responses.json", "w") as f:
             json.dump(responses, f)
 
     for response in responses:
         for item in response['items']:
-            if item['id']['kind'] == 'youtube#video':
+            if item['id']['kind'] == 'youtube#video' and item['snippet']['title'] in SPECIFIC_TITLES:
                 video_ids.append((item['id']['videoId'], item['snippet']['title']))
 
     return video_ids
@@ -81,7 +82,6 @@ def get_captions(video_id, title, output_dir):
         )
         response = request.execute()
 
-        # Save response to disk
         with open(os.path.join(output_dir, f"{clean_title}_response.json"), "w") as f:
             json.dump(response, f)
 
@@ -137,8 +137,6 @@ def parse_srt(srt_file, metadata_file, output_dir):
 
     output = []
     
-    # Step 1: simple mapping of captions to files.
-    # It is not entirely accurate, but it is a good starting point.
     possible_captions = []
     for caption in captions:
         start = caption.start.total_seconds()
@@ -148,10 +146,6 @@ def parse_srt(srt_file, metadata_file, output_dir):
             'end': end,
             'text': caption.content,
         })
-
-    # Step 2: Youtube will sometimes split a single caption into multiple
-    # parts, where the last word of one caption is the first word of the next
-    # caption. Create a new caption entry for each part of the split caption.
 
     integrated_captions = []
     for caption in possible_captions:
@@ -163,14 +157,11 @@ def parse_srt(srt_file, metadata_file, output_dir):
             last_caption['text'] += " " + first_word
             integrated_captions.append(caption | {'text': " ".join(rest)})
 
-    # Step 3: Add metadata to captions
     metadata_captions = []
     for caption in integrated_captions:
         matching_files = get_matching_files(caption['start'], caption['end'], metadata)
         metadata_captions.append(caption | {'files': matching_files})
-    
-    # Step 4: Combine captions that have the same file name.
-    # For captions with multiple files, we will take the second file.
+
     captions = []
     for meta in metadata:
         file_info = meta['file'].split('_')
@@ -199,7 +190,7 @@ def parse_srt(srt_file, metadata_file, output_dir):
 
     output = captions
 
-    integrated_captions_path = os.path.join(output_dir, os.path.basename(captions_file).replace('.srt', '.json'))
+    integrated_captions_path = os.path.join(output_dir, os.path.basename(srt_file).replace('.srt', '.json'))
     with open(integrated_captions_path, 'w', encoding='utf-8') as file:
         json.dump(output, file, ensure_ascii=False, indent=4)
 
@@ -219,18 +210,40 @@ if __name__ == "__main__":
     video_ids = get_all_video_ids(args.channel_id)
 
     for video_id, title in video_ids:
-        # Save captions
         get_captions(video_id, title, raw_captions_dir)
 
     for file in os.listdir(raw_captions_dir):
         if not file.endswith(f".{CAPTIONS_FORMAT}"):
             continue
+    
+    # Filter only Spanish videos
+        if "mexico_female" not in file and "mexico_male" not in file:
+            print(f"Skipping non-Spanish captions file: {file}")
+            continue
+    
         captions_file = os.path.join(raw_captions_dir, file)
         title = os.path.basename(captions_file)
-        # Integrate metadata into captions
-        clean_title = title.replace("concatenated_audio_", "").replace(f".{CAPTIONS_FORMAT}", "")
+        clean_title = title.replace("concatenated_audio2_", "").replace(f".{CAPTIONS_FORMAT}", "")
         metadata_file = os.path.join("../data", "interim", f"mapping_{clean_title}.json")
+        if "mexico_female" in clean_title:
+            metadata_file = os.path.join("../data", "interim", "mapping_mexico_female.json")
+        elif "mexico_male" in clean_title:
+            metadata_file = os.path.join("../data", "interim", "mapping_mexico_male.json")
+        else:
+            print(f"No matching metadata file for {clean_title}. Skipping...")
+            continue
+
+        print(f"Looking for metadata file: {metadata_file}")
+
+        if not os.path.exists(metadata_file):
+            print(f"File does not exist: {metadata_file}")
+            continue
+        if not os.path.exists(metadata_file):
+            print(f"Metadata file not found for {clean_title}. Skipping...")
+            continue
+
         if CAPTIONS_FORMAT == "srt":
             parse_srt(captions_file, metadata_file, intermediate_captions_dir)
         else:
             raise ValueError(f"Unsupported captions format: {CAPTIONS_FORMAT}")
+

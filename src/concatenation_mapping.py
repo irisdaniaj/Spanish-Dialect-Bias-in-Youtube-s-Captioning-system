@@ -126,17 +126,17 @@ def process_latam(base_audio_folder, output_folder):
     for country in countries:
         process_country_genders(country, genders, base_audio_folder, output_folder)
 
-def process_spain(base_audio_folder, output_folder, transcription_file):
+def process_mexico(base_audio_folder, output_folder, transcription_file):
     genders = ['female', 'male']
 
     for gender in genders:
-        processed_filename = f"concatenated_audio_spain_{gender}.wav"
+        processed_filename = f"concatenated_audio_mexico_{gender}.wav"
         output_file = os.path.join(output_folder, processed_filename)
-        mapping_filename = f"mapping_spain_{gender}.json"
+        mapping_filename = f"mapping_mexico_{gender}.json"
         mapping_file = os.path.join(output_folder, mapping_filename)
         
         if os.path.exists(output_file) and os.path.exists(mapping_file):
-            print(f"Skipping Spain - {gender} as {processed_filename} and {mapping_filename} already exist.")
+            print(f"Skipping Mexico - {gender} as {processed_filename} and {mapping_filename} already exist.")
             continue
 
         gender_path = os.path.join(base_audio_folder, gender)
@@ -146,7 +146,7 @@ def process_spain(base_audio_folder, output_folder, transcription_file):
             start_times = []
             current_time = 0.0
 
-            print(f"Processing Spain - {gender}")
+            print(f"Processing mexico - {gender}")
 
             for _, _, files in os.walk(gender_path):
                 for file in files:
@@ -161,7 +161,7 @@ def process_spain(base_audio_folder, output_folder, transcription_file):
                             print(f"Reached maximum duration of {MAX_DURATION} seconds. Ignoring remaining files.")
                             break
 
-            concatenate_audios(output_folder, 'spain', gender, audio_files, start_times, 16000)
+            concatenate_audios(output_folder, 'mexico', gender, audio_files, start_times, 16000)
         else:
             print(f"Directory does not exist: {gender_path}")
 
@@ -184,7 +184,7 @@ if __name__ == "__main__":
     silent_48000_audio_path = os.path.join(output_folder_latam, "silence_48000.wav")
     if not os.path.exists(silent_48000_audio_path):
         subprocess.run(["ffmpeg", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono", "-t", "5", silent_48000_audio_path])
-    # This is for Spain audios, which are sampled at 16000 Hz.
+    # This is for mexico audios, which are sampled at 16000 Hz.
     silent_16000_audio_path = os.path.join(output_folder_latam, "silence_16000.wav")
     if not os.path.exists(silent_16000_audio_path):
         subprocess.run(["ffmpeg", "-f", "lavfi", "-i", "anullsrc=r=16000:cl=mono", "-t", "5", silent_16000_audio_path])
@@ -192,15 +192,15 @@ if __name__ == "__main__":
     # Process LATAM audios
     process_latam(base_audio_folder_latam, output_folder_latam)
 
-    # Define the base audio folder and output folder for Spain
-    base_audio_folder_spain = os.path.join(base_dir, "data/raw/spain/tedx_spain/tedx_spanish_corpus/speech")
-    output_folder_spain = os.path.join(base_dir, "data/interim")
+    # Define the base audio folder and output folder for mexico
+    base_audio_folder_mexico = os.path.join(base_dir, "data/raw/mexico/tedx_mexico/tedx_spanish_corpus/speech")
+    output_folder_mexico = os.path.join(base_dir, "data/interim")
 
     # Ensure the output directory exists
-    os.makedirs(output_folder_spain, exist_ok=True)
+    os.makedirs(output_folder_mexico, exist_ok=True)
 
-    # Define the transcription file for Spain
-    transcription_file_spain = os.path.join(base_dir, "data/raw/spain/tedx_spain/tedx_spanish_corpus/files/TEDx_Spanish.transcription")
+    # Define the transcription file for mexico
+    transcription_file_mexico = os.path.join(base_dir, "data/raw/mexico/tedx_mexico/tedx_spanish_corpus/files/TEDx_Spanish.transcription")
 
-    # Process Spain audios and transcriptions
-    process_spain(base_audio_folder_spain, output_folder_spain, transcription_file_spain)
+    # Process mexico audios and transcriptions
+    process_mexico(base_audio_folder_mexico, output_folder_mexico, transcription_file_mexico)

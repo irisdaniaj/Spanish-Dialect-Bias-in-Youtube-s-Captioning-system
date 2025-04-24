@@ -25,7 +25,7 @@ and create a conda environment using the requirements.txt file
 ```
 conda create --name myenv --file requirements.txt
 ```
-After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the the spain folder). 
+After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the mexico folder). 
 Move to the scripts directory since we will run all the scripts from here. 
 ```
 cd scripts
@@ -83,39 +83,23 @@ python analysis.py
 and
 
 ```
-python analysis_spain.py 
+python analysis_mexico.py 
 ```
 
 This script will generate .csv file that contains the filename, generated captions, treu transcription and the word error rate in the the results/final/summary folder along with some summary statistics. 
 
-## Results 
+For the analysis of the prosedic features please run 
 
+```
+python audio_resample.py 
+python audio_analysis.py
+python audio_plot.py
+```
+For the modeling results please run 
 
-To evaluate the accuracy of the generated captions in comparison to the annotated ground truth data, I employed the Word-Error-Rate (WER) metric. A lower WER indicates better accuracy in recognizing speech. For instance, a WER of 20\% implies that the transcription is 80\% accurate.
-
-![Alt text](results/final/plots/wer_by_country.png)
-
-The above bar plot in illustrates the WER obtained for each country included in the study. Youtube's ASR achieved the best performance for speakers from Puerto Rico with a WER of 16\%, indicating that 84\% of the generated captions accurately matched the ground truth annotations, suggesting that the ASR system has a relatively high level of accuracy when transcribing the Puerto Rican dialect, which is part of the Caribbean dialect. Following Puerto Rican dialect, Youtube's ASR exhibited strong performance on both Castillian and Peruan dialects, each with a WER of 20\%. For Chilean and Colombian speakers, the generated captions were accurate in 78\% of cases, corresponding to a WER of 22\%. The worst performance was observed for Argentinian speakers, who experienced a WER of 24\%, meaning that only 76\% of the captions matched the reference transcriptions. 
-
-It's important to highlight the considerable difference in performance between the best (Puerto Rico, 16\% WER) and worst (Argentina, 24\% WER) results, with an 8\% gap in WER, which is quite significant. This performance gap indicates that while the Youtube's ASR system may be generally effective, there are clear disparities in how well it handles different Spanish dialects. Understanding the root causes of these disparities could be a critical area for future research, as it may point to specific phonetic or lexical features that the ASR system struggles with.
-
-![Alt text](results/final/plots/wer_by_country_and_gender.png)
-
-
-As shown in bar plot above, it's important to highlight that no data was available for male Puerto Rican speakers, which limits our ability to draw conclusions about gender-based performance for this dialect. However, in the cases of Chile, Colombia, Peru, and Spain, male speakers exhibited higher Word Error Rates compared to female speakers within the same dialects. This suggests that YouTube's ASR system may be slightly more attuned to the speech patterns of female speakers in these countries, although the difference between male and female WER is relatively small. 
-
-In contrast, in Venezuela and Argentina, male speakers achieved a lower WER, indicating better performance in the generated captions compared to their female counterparts. The performance gap between genders in these countries is more pronounced than in the other regions, suggesting that regional differences in gender-influenced speech characteristics might not be effectively captured by the ASR system.
-
-For a comprehensive analysis of the results and an in-depth overview of the entire project, please refer to the full report.
-
-
-## Conclusion 
-
-In conclusion, this study has provided valuable insights into the performance of YouTube's ASR system across different Spanish dialects, with a particular focus on gender-based differences. While the system demonstrated relatively strong performance for Puerto Rican female speakers, the results also highlighted significant disparities, such as the higher WER for Argentinian speakers. These findings underscore the need for further research to better understand the linguistic and technical factors that influence Youtube's ASR performance. Future studies should aim to broaden the scope of analysis to include a wider range of dialects and demographics, such as different age groups and underrepresented regions like Equatorial Guinea. Additionally, exploring phoneme-level challenges and conducting cross-platform comparisons will be crucial in identifying specific areas for improvement. Overcoming the current limitations related to data utilization and API constraints will be essential for enabling more comprehensive evaluations and driving advancements in ASR technology, ultimately contributing to more inclusive and accurate speech recognition systems.
-
-## Note 
-
-This repository contain my final project for the Advanced Methods in Social Statistics and Social Data Science, Summer Semester 2024 class at the Ludwig-Maximilians-Universität München. 
+```
+python model.py 
+```
 
 ## Acknowledgements 
 

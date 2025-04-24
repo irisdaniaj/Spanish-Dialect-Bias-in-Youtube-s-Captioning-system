@@ -1,0 +1,29 @@
+Mixed-Effects Model Results
+==================================================
+               Mixed Linear Model Regression Results
+===================================================================
+Model:              MixedLM   Dependent Variable:   word_error_rate
+No. Observations:   1865      Method:               REML           
+No. Groups:         173       Scale:                0.0212         
+Min. group size:    1         Log-Likelihood:       862.1987       
+Max. group size:    53        Converged:            Yes            
+Mean group size:    10.8                                           
+-------------------------------------------------------------------
+                        Coef.  Std.Err.    z    P>|z| [0.025 0.975]
+-------------------------------------------------------------------
+Intercept                0.468    0.030  15.373 0.000  0.408  0.528
+country[T.chilean]      -0.020    0.015  -1.293 0.196 -0.050  0.010
+country[T.colombian]    -0.010    0.015  -0.649 0.516 -0.039  0.020
+country[T.peruvian]     -0.018    0.015  -1.210 0.226 -0.047  0.011
+country[T.puerto_rican] -0.038    0.025  -1.529 0.126 -0.086  0.011
+country[T.venezuelan]    0.019    0.016   1.226 0.220 -0.012  0.050
+gender[T.male]           0.001    0.054   0.012 0.990 -0.105  0.106
+pitch                   -0.000    0.000  -0.616 0.538 -0.000  0.000
+pitch:gender[T.male]     0.000    0.000   0.006 0.995 -0.001  0.001
+intensity               -6.966    0.459 -15.169 0.000 -7.866 -6.066
+Group Var                0.002    0.003                            
+===================================================================
+
+==================================================
+AIC: nan
+BIC: nan

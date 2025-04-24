@@ -1,6 +1,5 @@
-import os 
+import os
 import subprocess
-
 
 def convert_audio_to_video(audio_file, image_file, output_file):
     # Convert to have 480x360 resolution.
@@ -18,7 +17,6 @@ def convert_audio_to_video(audio_file, image_file, output_file):
     ]
     subprocess.run(command, check=True)
 
-
 if __name__ == "__main__":
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,9 +33,9 @@ if __name__ == "__main__":
     # Ensure the processed directory exists
     os.makedirs(processed_folder, exist_ok=True)
 
-    # Iterate over all .wav files in the specified folder
+    # Iterate over .wav files starting with "concatenated_"
     for audio_file in os.listdir(audio_folder):
-        if audio_file.endswith(".wav"):
+        if audio_file.endswith(".wav") and audio_file.startswith("concatenated_"):
             audio_path = os.path.join(audio_folder, audio_file)
             video_file = os.path.join(processed_folder, os.path.splitext(audio_file)[0] + ".mp4")
 
@@ -47,4 +45,6 @@ if __name__ == "__main__":
                 continue
 
             # Convert audio to video
+            print(f"Processing: {audio_file} -> {video_file}")
             convert_audio_to_video(audio_path, image_file, video_file)
+            print(f"Created: {video_file}")

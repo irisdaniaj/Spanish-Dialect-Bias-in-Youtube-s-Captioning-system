@@ -62,8 +62,9 @@ if __name__ == "__main__":
     
     # Define the base audio folder
     base_audio_folder_gender = os.path.join(base_dir, "data/raw/LATAM")
-    base_audio_folder = os.path.join(base_dir, "data/raw/spain/tedx_spain/tedx_spanish_corpus/speech")
+    base_audio_folder = os.path.join(base_dir, "data/raw/mexico/tedx_mexico/tedx_spanish_corpus/speech")
 
+    os.makedirs(base_audio_folder, exist_ok=True)
     # Move the audio files
     move_audio_files(base_audio_folder)
     # Rename the gender folders

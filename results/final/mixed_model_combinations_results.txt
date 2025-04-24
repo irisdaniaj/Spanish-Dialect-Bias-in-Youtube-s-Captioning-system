@@ -1,0 +1,325 @@
+Mixed-Effects Model Results for All Predictor Combinations
+================================================================================
+Model 1: word_error_rate ~ country
+AIC: -1537.3232, BIC: -1493.0751
+              Mixed Linear Model Regression Results
+==================================================================
+Model:               MixedLM  Dependent Variable:  word_error_rate
+No. Observations:    1865     Method:              ML             
+No. Groups:          173      Scale:               0.0247         
+Min. group size:     1        Log-Likelihood:      776.6616       
+Max. group size:     53       Converged:           Yes            
+Mean group size:     10.8                                         
+------------------------------------------------------------------
+                        Coef.  Std.Err.   z    P>|z| [0.025 0.975]
+------------------------------------------------------------------
+Intercept                0.302    0.010 30.707 0.000  0.283  0.321
+country[T.chilean]      -0.013    0.014 -0.899 0.369 -0.041  0.015
+country[T.colombian]    -0.024    0.014 -1.683 0.092 -0.052  0.004
+country[T.peruvian]     -0.029    0.014 -2.076 0.038 -0.057 -0.002
+country[T.puerto_rican] -0.080    0.021 -3.756 0.000 -0.122 -0.038
+country[T.venezuelan]   -0.013    0.014 -0.896 0.370 -0.041  0.015
+Group Var                0.001    0.003                           
+==================================================================
+================================================================================
+Model 2: word_error_rate ~ gender
+AIC: -1509.9605, BIC: -1487.8364
+            Mixed Linear Model Regression Results
+=============================================================
+Model:            MixedLM Dependent Variable: word_error_rate
+No. Observations: 1865    Method:             ML             
+No. Groups:       173     Scale:              0.0236         
+Min. group size:  1       Log-Likelihood:     758.9802       
+Max. group size:  53      Converged:          No             
+Mean group size:  10.8                                       
+-------------------------------------------------------------
+                   Coef.  Std.Err.   z    P>|z| [0.025 0.975]
+-------------------------------------------------------------
+Intercept           0.285    0.009 32.705 0.000  0.268  0.302
+gender[T.male]     -0.000    0.013 -0.032 0.974 -0.025  0.024
+Group Var           0.004    0.014                           
+=============================================================
+================================================================================
+Model 3: word_error_rate ~ pitch
+AIC: -1521.8957, BIC: -1499.7716
+            Mixed Linear Model Regression Results
+=============================================================
+Model:            MixedLM Dependent Variable: word_error_rate
+No. Observations: 1865    Method:             ML             
+No. Groups:       173     Scale:              0.0236         
+Min. group size:  1       Log-Likelihood:     764.9478       
+Max. group size:  53      Converged:          No             
+Mean group size:  10.8                                       
+--------------------------------------------------------------
+               Coef.   Std.Err.    z     P>|z|  [0.025  0.975]
+--------------------------------------------------------------
+Intercept       0.337     0.021  16.224  0.000   0.297   0.378
+pitch          -0.000     0.000  -2.678  0.007  -0.001  -0.000
+Group Var       0.004     0.010                               
+=============================================================
+================================================================================
+Model 4: word_error_rate ~ intensity
+AIC: -1783.9065, BIC: -1761.7825
+            Mixed Linear Model Regression Results
+=============================================================
+Model:            MixedLM Dependent Variable: word_error_rate
+No. Observations: 1865    Method:             ML             
+No. Groups:       173     Scale:              0.0209         
+Min. group size:  1       Log-Likelihood:     895.9533       
+Max. group size:  53      Converged:          No             
+Mean group size:  10.8                                       
+--------------------------------------------------------------
+              Coef.   Std.Err.     z     P>|z|  [0.025  0.975]
+--------------------------------------------------------------
+Intercept      0.450     0.012   38.625  0.000   0.427   0.473
+intensity     -7.130     0.447  -15.951  0.000  -8.006  -6.254
+Group Var      0.002     0.004                                
+=============================================================
+================================================================================
+Model 5: word_error_rate ~ country + gender
+AIC: -1535.5071, BIC: -1485.7280
+              Mixed Linear Model Regression Results
+==================================================================
+Model:               MixedLM  Dependent Variable:  word_error_rate
+No. Observations:    1865     Method:              ML             
+No. Groups:          173      Scale:               0.0247         
+Min. group size:     1        Log-Likelihood:      776.7536       
+Max. group size:     53       Converged:           Yes            
+Mean group size:     10.8                                         
+------------------------------------------------------------------
+                        Coef.  Std.Err.   z    P>|z| [0.025 0.975]
+------------------------------------------------------------------
+Intercept                0.304    0.011 28.501 0.000  0.283  0.324
+country[T.chilean]      -0.013    0.014 -0.878 0.380 -0.041  0.016
+country[T.colombian]    -0.024    0.014 -1.668 0.095 -0.051  0.004
+country[T.peruvian]     -0.029    0.014 -2.061 0.039 -0.057 -0.001
+country[T.puerto_rican] -0.082    0.022 -3.778 0.000 -0.125 -0.040
+country[T.venezuelan]   -0.013    0.014 -0.878 0.380 -0.041  0.016
+gender[T.male]          -0.004    0.009 -0.429 0.668 -0.022  0.014
+Group Var                0.001    0.003                           
+==================================================================
+================================================================================
+Model 6: word_error_rate ~ country + pitch
+AIC: -1515.2448, BIC: -1465.4656
+              Mixed Linear Model Regression Results
+==================================================================
+Model:               MixedLM  Dependent Variable:  word_error_rate
+No. Observations:    1865     Method:              ML             
+No. Groups:          173      Scale:               0.0234         
+Min. group size:     1        Log-Likelihood:      766.6224       
+Max. group size:     53       Converged:           No             
+Mean group size:     10.8                                         
+------------------------------------------------------------------
+                        Coef.  Std.Err.   z    P>|z| [0.025 0.975]
+------------------------------------------------------------------
+Intercept                0.358    0.028 12.912 0.000  0.304  0.413
+country[T.chilean]      -0.014    0.020 -0.706 0.480 -0.053  0.025
+country[T.colombian]    -0.027    0.019 -1.388 0.165 -0.065  0.011
+country[T.peruvian]     -0.034    0.019 -1.778 0.075 -0.072  0.004
+country[T.puerto_rican] -0.073    0.034 -2.127 0.033 -0.140 -0.006
+country[T.venezuelan]   -0.014    0.021 -0.663 0.507 -0.054  0.027
+pitch                   -0.000    0.000 -2.347 0.019 -0.001 -0.000
+Group Var                0.004    0.021                           
+==================================================================
+================================================================================
+Model 7: word_error_rate ~ country + intensity
+AIC: -1780.7984, BIC: -1731.0192
+               Mixed Linear Model Regression Results
+===================================================================
+Model:              MixedLM   Dependent Variable:   word_error_rate
+No. Observations:   1865      Method:               ML             
+No. Groups:         173       Scale:                0.0207         
+Min. group size:    1         Log-Likelihood:       899.3992       
+Max. group size:    53        Converged:            Yes            
+Mean group size:    10.8                                           
+-------------------------------------------------------------------
+                        Coef.  Std.Err.    z    P>|z| [0.025 0.975]
+-------------------------------------------------------------------
+Intercept                0.461    0.015  30.309 0.000  0.431  0.491
+country[T.chilean]      -0.022    0.017  -1.310 0.190 -0.055  0.011
+country[T.colombian]    -0.010    0.017  -0.603 0.547 -0.042  0.022
+country[T.peruvian]     -0.018    0.016  -1.111 0.267 -0.050  0.014
+country[T.puerto_rican] -0.039    0.028  -1.382 0.167 -0.095  0.016
+country[T.venezuelan]    0.018    0.018   1.031 0.303 -0.016  0.052
+intensity               -7.253    0.456 -15.901 0.000 -8.147 -6.359
+Group Var                0.003    0.005                            
+===================================================================
+================================================================================
+Model 8: word_error_rate ~ gender + pitch + pitch:gender
+AIC: -1520.2550, BIC: -1487.0689
+             Mixed Linear Model Regression Results
+===============================================================
+Model:              MixedLM Dependent Variable: word_error_rate
+No. Observations:   1865    Method:             ML             
+No. Groups:         173     Scale:              0.0234         
+Min. group size:    1       Log-Likelihood:     766.1275       
+Max. group size:    53      Converged:          No             
+Mean group size:    10.8                                       
+---------------------------------------------------------------
+                     Coef.  Std.Err.   z    P>|z| [0.025 0.975]
+---------------------------------------------------------------
+Intercept             0.391    0.035 11.209 0.000  0.322  0.459
+gender[T.male]       -0.020    0.063 -0.321 0.748 -0.144  0.104
+pitch                -0.001    0.000 -3.153 0.002 -0.001 -0.000
+pitch:gender[T.male] -0.000    0.000 -0.298 0.766 -0.001  0.001
+Group Var             0.004    0.012                           
+===============================================================
+================================================================================
+Model 9: word_error_rate ~ gender + intensity
+AIC: -1782.6361, BIC: -1754.9810
+            Mixed Linear Model Regression Results
+=============================================================
+Model:            MixedLM Dependent Variable: word_error_rate
+No. Observations: 1865    Method:             ML             
+No. Groups:       173     Scale:              0.0208         
+Min. group size:  1       Log-Likelihood:     896.3181       
+Max. group size:  53      Converged:          No             
+Mean group size:  10.8                                       
+-------------------------------------------------------------
+                  Coef.  Std.Err.    z    P>|z| [0.025 0.975]
+-------------------------------------------------------------
+Intercept          0.446    0.012  35.751 0.000  0.422  0.470
+gender[T.male]     0.009    0.010   0.890 0.374 -0.011  0.030
+intensity         -7.154    0.447 -15.990 0.000 -8.031 -6.277
+Group Var          0.002    0.004                            
+=============================================================
+================================================================================
+Model 10: word_error_rate ~ pitch + intensity
+AIC: -1782.7063, BIC: -1755.0512
+            Mixed Linear Model Regression Results
+=============================================================
+Model:            MixedLM Dependent Variable: word_error_rate
+No. Observations: 1865    Method:             ML             
+No. Groups:       173     Scale:              0.0208         
+Min. group size:  1       Log-Likelihood:     896.3531       
+Max. group size:  53      Converged:          No             
+Mean group size:  10.8                                       
+--------------------------------------------------------------
+              Coef.   Std.Err.     z     P>|z|  [0.025  0.975]
+--------------------------------------------------------------
+Intercept      0.464     0.019   24.061  0.000   0.426   0.501
+pitch         -0.000     0.000   -0.886  0.376  -0.000   0.000
+intensity     -7.083     0.451  -15.712  0.000  -7.966  -6.199
+Group Var      0.002     0.004                                
+=============================================================
+================================================================================
+Model 11: word_error_rate ~ country + gender + pitch + pitch:gender
+AIC: -1547.4167, BIC: -1486.5755
+              Mixed Linear Model Regression Results
+==================================================================
+Model:               MixedLM  Dependent Variable:  word_error_rate
+No. Observations:    1865     Method:              ML             
+No. Groups:          173      Scale:               0.0245         
+Min. group size:     1        Log-Likelihood:      784.7083       
+Max. group size:     53       Converged:           Yes            
+Mean group size:     10.8                                         
+------------------------------------------------------------------
+                        Coef.  Std.Err.   z    P>|z| [0.025 0.975]
+------------------------------------------------------------------
+Intercept                0.395    0.030 12.980 0.000  0.335  0.455
+country[T.chilean]      -0.004    0.014 -0.284 0.777 -0.032  0.024
+country[T.colombian]    -0.022    0.014 -1.561 0.119 -0.050  0.006
+country[T.peruvian]     -0.027    0.014 -1.949 0.051 -0.055  0.000
+country[T.puerto_rican] -0.087    0.021 -4.041 0.000 -0.129 -0.045
+country[T.venezuelan]   -0.004    0.014 -0.297 0.767 -0.033  0.024
+gender[T.male]           0.004    0.054  0.074 0.941 -0.102  0.110
+pitch                   -0.001    0.000 -3.220 0.001 -0.001 -0.000
+pitch:gender[T.male]    -0.000    0.000 -0.870 0.384 -0.001  0.000
+Group Var                0.001    0.002                           
+==================================================================
+================================================================================
+Model 12: word_error_rate ~ country + gender + intensity
+AIC: -1779.2173, BIC: -1723.9071
+               Mixed Linear Model Regression Results
+===================================================================
+Model:              MixedLM   Dependent Variable:   word_error_rate
+No. Observations:   1865      Method:               ML             
+No. Groups:         173       Scale:                0.0207         
+Min. group size:    1         Log-Likelihood:       899.6086       
+Max. group size:    53        Converged:            No             
+Mean group size:    10.8                                           
+-------------------------------------------------------------------
+                        Coef.  Std.Err.    z    P>|z| [0.025 0.975]
+-------------------------------------------------------------------
+Intercept                0.458    0.016  29.230 0.000  0.428  0.489
+country[T.chilean]      -0.023    0.017  -1.374 0.169 -0.056  0.010
+country[T.colombian]    -0.011    0.017  -0.652 0.514 -0.043  0.022
+country[T.peruvian]     -0.019    0.016  -1.162 0.245 -0.051  0.013
+country[T.puerto_rican] -0.036    0.029  -1.243 0.214 -0.092  0.021
+country[T.venezuelan]    0.017    0.018   0.975 0.329 -0.017  0.052
+gender[T.male]           0.008    0.011   0.747 0.455 -0.013  0.030
+intensity               -7.278    0.456 -15.943 0.000 -8.172 -6.383
+Group Var                0.003    0.005                            
+===================================================================
+================================================================================
+Model 13: word_error_rate ~ country + pitch + intensity
+AIC: -1779.5362, BIC: -1724.2260
+               Mixed Linear Model Regression Results
+===================================================================
+Model:              MixedLM   Dependent Variable:   word_error_rate
+No. Observations:   1865      Method:               ML             
+No. Groups:         173       Scale:                0.0207         
+Min. group size:    1         Log-Likelihood:       899.7681       
+Max. group size:    53        Converged:            Yes            
+Mean group size:    10.8                                           
+-------------------------------------------------------------------
+                        Coef.  Std.Err.    z    P>|z| [0.025 0.975]
+-------------------------------------------------------------------
+Intercept                0.475    0.022  21.826 0.000  0.432  0.517
+country[T.chilean]      -0.021    0.017  -1.270 0.204 -0.054  0.012
+country[T.colombian]    -0.010    0.017  -0.618 0.537 -0.043  0.022
+country[T.peruvian]     -0.019    0.016  -1.145 0.252 -0.051  0.013
+country[T.puerto_rican] -0.038    0.028  -1.324 0.186 -0.093  0.018
+country[T.venezuelan]    0.019    0.018   1.063 0.288 -0.016  0.053
+pitch                   -0.000    0.000  -0.850 0.395 -0.000  0.000
+intensity               -7.207    0.460 -15.669 0.000 -8.109 -6.306
+Group Var                0.003    0.005                            
+===================================================================
+================================================================================
+Model 14: word_error_rate ~ gender + pitch + intensity + pitch:gender
+AIC: -1779.0667, BIC: -1740.3496
+             Mixed Linear Model Regression Results
+================================================================
+Model:             MixedLM  Dependent Variable:  word_error_rate
+No. Observations:  1865     Method:              ML             
+No. Groups:        173      Scale:               0.0209         
+Min. group size:   1        Log-Likelihood:      896.5334       
+Max. group size:   53       Converged:           No             
+Mean group size:   10.8                                         
+----------------------------------------------------------------
+                     Coef.  Std.Err.    z    P>|z| [0.025 0.975]
+----------------------------------------------------------------
+Intercept             0.456    0.030  15.040 0.000  0.397  0.516
+gender[T.male]        0.002    0.055   0.029 0.977 -0.106  0.109
+pitch                -0.000    0.000  -0.389 0.697 -0.000  0.000
+pitch:gender[T.male]  0.000    0.000   0.074 0.941 -0.001  0.001
+intensity            -7.100    0.458 -15.488 0.000 -7.999 -6.202
+Group Var             0.002    0.004                            
+================================================================
+================================================================================
+Model 15: word_error_rate ~ country + gender + pitch + intensity + pitch:gender
+AIC: -1776.0150, BIC: -1709.6428
+               Mixed Linear Model Regression Results
+===================================================================
+Model:              MixedLM   Dependent Variable:   word_error_rate
+No. Observations:   1865      Method:               ML             
+No. Groups:         173       Scale:                0.0207         
+Min. group size:    1         Log-Likelihood:       900.0075       
+Max. group size:    53        Converged:            No             
+Mean group size:    10.8                                           
+-------------------------------------------------------------------
+                        Coef.  Std.Err.    z    P>|z| [0.025 0.975]
+-------------------------------------------------------------------
+Intercept                0.473    0.032  14.924 0.000  0.411  0.535
+country[T.chilean]      -0.022    0.017  -1.285 0.199 -0.055  0.011
+country[T.colombian]    -0.010    0.017  -0.614 0.539 -0.043  0.022
+country[T.peruvian]     -0.019    0.016  -1.168 0.243 -0.051  0.013
+country[T.puerto_rican] -0.037    0.029  -1.289 0.198 -0.093  0.019
+country[T.venezuelan]    0.018    0.018   1.041 0.298 -0.016  0.053
+gender[T.male]          -0.009    0.056  -0.159 0.874 -0.119  0.101
+pitch                   -0.000    0.000  -0.525 0.599 -0.000  0.000
+pitch:gender[T.male]     0.000    0.000   0.224 0.823 -0.001  0.001
+intensity               -7.218    0.471 -15.330 0.000 -8.141 -6.295
+Group Var                0.003    0.005                            
+===================================================================
+================================================================================
