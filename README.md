@@ -10,7 +10,7 @@ My research aims to answer this question. To do so, we will use Google's [Crowds
 ## Data Download
 
 Here you can Download the Datatsets:
-[Argentina](https://www.openslr.org/61/), [Chile](https://www.openslr.org/71/), [Colombia](https://www.openslr.org/72/), [Spain](https://www.openslr.org/67/), [Peru](https://www.openslr.org/73/), [Puerto Rico](https://www.openslr.org/74/) and [Venezuela](https://www.openslr.org/75/). 
+[Argentina](https://www.openslr.org/61/), [Chile](https://www.openslr.org/71/), [Colombia](https://www.openslr.org/72/), [Mexico](https://www.openslr.org/67/), [Peru](https://www.openslr.org/73/), [Puerto Rico](https://www.openslr.org/74/) and [Venezuela](https://www.openslr.org/75/). 
 After the download you can put the data into the correspective folders. Note: There is no male audio for the Puerto Rico dataset. 
 
 ## Main 
@@ -20,17 +20,20 @@ Clone the repository
 ```
 git clone https://github.com/irisdaniaj/Spanish-Dialect-Bias-in-Youtube-s-Captioning-system.git
 ```
-and create a conda environment using the requirements.txt file 
+and create a conda environment using the environment.yml file 
 
 ```
-conda create --name myenv --file requirements.txt
+conda env create -f environment.yml
+conda activate dialect-bias
 ```
-After downloading the data move them into the corresponding folders(all LATAM contries in the LATAM folder and extract the tedx_spain folder in the mexico folder). 
+After downloading the data move them into the corresponding folders(Argentina, Chile, Colombia, Peru, Puerto Rico and Venezuela countries in the LATAM folder and extract the TEDx Spanish Corpus dataset in the Mexico folder). 
 Move to the scripts directory since we will run all the scripts from here. 
+
 ```
-cd scripts
+cd src
 ```
-and then execute the rename_and_move.py script
+and then execute 
+
 ```
 python rename_and_move.py
 ```
