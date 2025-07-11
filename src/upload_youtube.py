@@ -14,15 +14,15 @@ def authenticate():
     creds = None
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-    if not creds or not creds.valid or creds.scopes != SCOPES:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(client_secret_file, SCOPES)  # Replace with your client secret file
-            creds = flow.run_local_server(port=0)
+
+    if not creds or not creds.valid:
+        flow = InstalledAppFlow.from_client_secrets_file("client_secret.json", SCOPES)
+        creds = flow.run_local_server(port=0)
+        # Save token for future runs
         with open("token.json", "w") as token:
             token.write(creds.to_json())
     return creds
+
 
 def upload_video(video_file, title, description, tags, category, privacy_status, uploaded_videos):
     creds = authenticate()

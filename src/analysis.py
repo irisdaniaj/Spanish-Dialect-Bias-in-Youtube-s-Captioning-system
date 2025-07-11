@@ -134,7 +134,9 @@ def save_country_overall_summary(countries, female_wers, male_wers, female_cers,
 
 def save_gender_summary(female_wers, male_wers, female_cers, male_cers, female_recalls, male_recalls, output_file):
     valid_female_wers = [wer for wer in female_wers if wer is not None]
+    print(f"Valid female WERs: {valid_female_wers}")
     valid_male_wers = [wer for wer in male_wers if wer is not None]
+    print(f"Valid male WERs: {valid_male_wers}")
     valid_female_cers = [cer for cer in female_cers if cer is not None]
     valid_male_cers = [cer for cer in male_cers if cer is not None]
     valid_female_recalls = [recall for recall in female_recalls if recall is not None]
@@ -215,8 +217,12 @@ def main():
 
             captions_data, transcription_data = load_data(captions_file, transcription_file)
 
-            if captions_data is None or transcription_data is None:
-                continue
+            if captions_data is None:
+                print(f"⛔ No captions found at {captions_file}")
+            if transcription_data is None:
+                print(f"⛔ No transcriptions found at {transcription_file}")
+            else:
+                print(f"✅ Loaded {len(captions_data)} captions and {len(transcription_data)} transcriptions for {country}_{gender}")
 
             # Calculate WER, CER, and recall
             results = calculate_error_rates(captions_data, transcription_data, case_sensitive=True)

@@ -193,14 +193,14 @@ if __name__ == "__main__":
     process_latam(base_audio_folder_latam, output_folder_latam)
 
     # Define the base audio folder and output folder for mexico
-    base_audio_folder_mexico = os.path.join(base_dir, "data/raw/mexico/tedx_mexico/tedx_spanish_corpus/speech")
+    base_audio_folder_mexico = os.path.join(base_dir, "data/raw/mexico/speech")
     output_folder_mexico = os.path.join(base_dir, "data/interim")
 
     # Ensure the output directory exists
     os.makedirs(output_folder_mexico, exist_ok=True)
 
     # Define the transcription file for mexico
-    transcription_file_mexico = os.path.join(base_dir, "data/raw/mexico/tedx_mexico/tedx_spanish_corpus/files/TEDx_Spanish.transcription")
+    transcription_file_mexico = os.path.join(base_dir, "data/raw/mexico/TEDx_Spanish.transcription")
 
     # Process mexico audios and transcriptions
     process_mexico(base_audio_folder_mexico, output_folder_mexico, transcription_file_mexico)
