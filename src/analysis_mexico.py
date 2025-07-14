@@ -107,7 +107,7 @@ def save_combined_results(results, output_file):
     results_df.to_csv(output_file, index=False)
 
 def main():
-    raw_data_dir = "../data/raw/mexico/tedx_mexico/tedx_spanish_corpus/files"
+    raw_data_dir = "../data/raw/mexico"
     captions_dir =  "../results/intermediate/captions_integrated"
     summary_output_dir = "../results/final/summary"
 

@@ -230,12 +230,9 @@ if __name__ == "__main__":
         # Integrate metadata into captions
         clean_title = title.replace("concatenated_audio_", "").replace(f".{CAPTIONS_FORMAT}", "")
         metadata_file = os.path.join("../data", "interim", f"mapping_{clean_title}.json")
-        if "mexico_female" in clean_title:
-            metadata_file = os.path.join("../data", "interim", "mapping_mexico_female.json")
-        elif "mexico_male" in clean_title:
-            metadata_file = os.path.join("../data", "interim", "mapping_mexico_male.json")
-        else:
-            print(f"No matching metadata file for {clean_title}. Skipping...")
+
+        if not os.path.exists(metadata_file):
+            print(f"Metadata file not found for '{clean_title}'. Expected at: {metadata_file}. Skipping...")
             continue
 
         if CAPTIONS_FORMAT == "srt":
