@@ -33,7 +33,7 @@ def get_all_video_ids(channel_id):
     video_ids = []
     # Load responses from disk if available.
     # It is expensive to fetch all video IDs, so we cache the responses.
-    if os.path.exists("responses.json"):
+    if os.path.exists("responses.json") and not args.refresh:
         print("Found cached responses. Loading...")
         with open("responses.json", "r") as f:
             responses = json.load(f)
@@ -206,6 +206,8 @@ def parse_srt(srt_file, metadata_file, output_dir):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Retrieve and integrate captions from YouTube videos")
     parser.add_argument("channel_id", help="The ID of the YouTube channel")
+    parser.add_argument("--refresh", action="store_true", help="Force refresh video list from YouTube")
+
 
     args = parser.parse_args()
 

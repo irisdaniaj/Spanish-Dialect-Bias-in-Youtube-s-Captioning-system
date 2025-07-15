@@ -6,8 +6,8 @@ import os
 # Define directories
 script_dir = os.path.dirname(os.path.abspath(__file__))
 base_dir = os.path.dirname(script_dir)
-data_dir = os.path.join(base_dir, "results/final")  
-data_path = os.path.join(data_dir, "audio_metrics_updated.csv")
+data_dir = os.path.join(base_dir, "results/final/summary")  
+data_path = os.path.join(data_dir, "audio_metrics.csv")
 
 # Output directory
 output_dir = os.path.join(base_dir, "results/final")

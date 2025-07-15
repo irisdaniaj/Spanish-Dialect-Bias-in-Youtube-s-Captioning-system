@@ -189,7 +189,7 @@ def main():
     captions_dir = os.path.join(base_dir, "../results/intermediate/captions_integrated")
     summary_output_dir = os.path.join(base_dir, "../results/final/summary")
 
-    countries = ['argentinian', 'chilean', 'colombian', 'peruvian', 'puerto_rican', 'venezuelan']
+    countries = ['argentinian', "chilean" ,'colombian', 'peruvian', 'puerto_rican', 'venezuelan']
     genders = ['female', 'male']
 
     os.makedirs(summary_output_dir, exist_ok=True)

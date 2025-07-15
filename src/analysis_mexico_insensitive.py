@@ -110,7 +110,7 @@ def save_combined_results(results, output_file):
 
 def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    raw_data_dir = os.path.join(base_dir, "../data/raw/mexico/tedx_mexico/tedx_spanish_corpus/files")
+    raw_data_dir = os.path.join(base_dir, "../data/raw/mexico")
     captions_dir = os.path.join(base_dir, "../results/intermediate/captions_integrated")
     summary_output_dir = os.path.join(base_dir, "../results/final/summary")
 
