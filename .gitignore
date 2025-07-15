@@ -5,6 +5,7 @@
 client_secret.json
 token.json
 mapping*.json
+*.json
 *.log
 *.mp4
 *.csv
@@ -15,4 +16,4 @@ results/raw/captions/*.srt
 .venv/
 venv/
 .DS_Store
-scripts/responses.json
+src/responses.json
